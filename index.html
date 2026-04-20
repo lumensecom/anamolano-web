@@ -31,7 +31,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Parisienne&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    
+    <!-- Script base de Cal.com -->
+    <script>
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    </script>
     
     <script>
         tailwind.config = {
@@ -853,7 +857,7 @@
                             </h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
                                 <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Capilar" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💇‍♀️</span> Cuidado Capilar (Ana)</div></label>
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Nails" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💅</span> Nail Spa (Zamara / Tatiana)</div></label>
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Nails" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💅</span> Nail Spa (Zamara)</div></label>
                                 <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Estetica" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">👁️</span> Lifting Pestañas (Tatiana)</div></label>
                                 <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Hombre" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">✂️</span> Corte Hombre (Ana)</div></label>
                             </div>
@@ -1169,39 +1173,46 @@
             if(!servicioInput) return;
             const servicio = servicioInput.value;
             
-            // ⚠️ Aquí debes poner los links de Calendly separados para cada especialista
-            // Solo cambia lo que está dentro de las comillas
-            let urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; 
+            let calLink = "";
+            let namespace = "";
             
             if(servicio === 'Capilar') {
-                urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; // ⚠️ Link de Ana (Corte/Color)
-            }
-            if(servicio === 'Nails') {
-                urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; // ⚠️ Link de Zamara o Tatiana (Uñas)
-            }
-            if(servicio === 'Estetica') {
-                urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; // ⚠️ Link de Tatiana (Lifting)
-            }
-            if(servicio === 'Hombre') {
-                urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; // ⚠️ Link de Ana (Corte Hombre)
+                calLink = "anamolanopeluqueria/ana";
+                namespace = "ana";
+            } else if(servicio === 'Nails') {
+                calLink = "anamolanopeluqueria/cita-con-zamara";
+                namespace = "cita-con-zamara";
+            } else if(servicio === 'Estetica') {
+                calLink = "anamolanopeluqueria/cita-con-tatiana";
+                namespace = "cita-con-tatiana";
+            } else if(servicio === 'Hombre') {
+                calLink = "anamolanopeluqueria/ana";
+                namespace = "ana";
             }
 
             const calendlySec = document.getElementById('calendly-section');
             calendlySec.classList.remove('opacity-30', 'pointer-events-none', 'h-0');
             calendlySec.classList.add('h-[750px]'); 
 
-            // Cargar el widget de Calendly dinámicamente con la URL seleccionada
+            // Cargar el widget de Cal.com dinámicamente con la URL seleccionada
             const embedContainer = document.getElementById('calendly-embed');
-            embedContainer.innerHTML = ''; // Limpiamos el anterior si existía
+            embedContainer.innerHTML = `<div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-${namespace}"></div>`; 
             
-            if (window.Calendly) {
-                window.Calendly.initInlineWidget({
-                    url: urlCalendly + '?hide_gdpr_banner=1&background_color=ffffff&text_color=1f1f1f&primary_color=e83e8c',
-                    parentElement: embedContainer,
-                    prefill: {},
-                    utm: {}
-                });
-            }
+            // Inicializar Cal.com
+            Cal("init", namespace, {origin:"https://app.cal.com"});
+            
+            Cal.ns[namespace]("inline", {
+                elementOrSelector: `#my-cal-inline-${namespace}`,
+                config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"light"},
+                calLink: calLink,
+            });
+
+            Cal.ns[namespace]("ui", {
+                "theme":"light",
+                "cssVarsPerTheme":{"light":{"cal-brand":"#e83e8c"},"dark":{"cal-brand":"#e83e8c"}},
+                "hideEventTypeDetails":true,
+                "layout":"month_view"
+            });
 
             setTimeout(() => { calendlySec.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
         }
