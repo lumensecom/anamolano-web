@@ -52,7 +52,10 @@
         }
     </script>
     <style>
-        html { scroll-behavior: smooth; }
+        html { 
+            scroll-behavior: smooth; 
+            -webkit-tap-highlight-color: transparent; /* Elimina recuadro azul de toque en móviles */
+        }
         .input-minimalista { background-color: transparent; border: 1px solid #e5e7eb; border-radius: 0px; padding: 0.75rem 1rem; transition: all 0.3s ease; }
         .input-minimalista:focus { outline: none; border-color: #e83e8c; box-shadow: none; }
         .service-card:hover .service-img-overlay { background-color: rgba(0,0,0,0.1); }
@@ -217,7 +220,7 @@
              ============================================== -->
         <div id="view-home" class="page-view active">
             <!-- Carrusel Principal -->
-            <section class="relative w-full h-[65vh] md:h-[85vh] overflow-hidden group mt-0">
+            <section class="relative w-full h-[85svh] md:h-[90vh] overflow-hidden group mt-0">
                 <div id="carousel-track" class="flex h-full w-[300%] carousel-track">
                     <div class="w-1/3 h-full relative flex-shrink-0 bg-black overflow-hidden">
                         <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776449105/0W3A1359_duecdn.jpg" alt="Ana Molano Peluquería" class="w-full h-full object-cover object-center opacity-90 animate-kenburns">
@@ -880,6 +883,21 @@
             document.getElementById('gallery-total').textContent = galleryImages.length;
         }
 
+        // --- GESTOS TÁCTILES PARA LA GALERÍA (MÓVIL) ---
+        let touchstartX = 0;
+        let touchendX = 0;
+        const lightboxElement = document.getElementById('gallery-lightbox');
+
+        lightboxElement.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        lightboxElement.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            if (touchendX < touchstartX - 40) changeGalleryImage(1); // Deslizar hacia la izquierda (Siguiente)
+            if (touchendX > touchstartX + 40) changeGalleryImage(-1); // Deslizar hacia la derecha (Anterior)
+        }, {passive: true});
+
         document.addEventListener('keydown', (e) => {
             const lightbox = document.getElementById('gallery-lightbox');
             if (!lightbox.classList.contains('hidden')) {
@@ -899,7 +917,14 @@
             if(!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
             
             if(updateHistory) { history.pushState(null, null, '#' + viewId); }
-            if(viewId !== 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Salto instantáneo hacia arriba y control de batería para el carrusel
+            window.scrollTo(0, 0);
+            if(viewId !== 'home') {
+                clearInterval(slideInterval); // Pausa animaciones pesadas si no estás en el inicio
+            } else {
+                resetInterval(); // Reanuda si vuelves al inicio
+            }
         }
 
         window.addEventListener('popstate', () => {
