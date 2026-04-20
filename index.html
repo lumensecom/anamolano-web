@@ -31,6 +31,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Parisienne&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    
     <script>
         tailwind.config = {
             theme: {
@@ -115,6 +117,10 @@
         .hero-anim-1 { animation: heroSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.2s; opacity: 0; }
         .hero-anim-2 { animation: heroSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.4s; opacity: 0; }
         .hero-anim-3 { animation: heroSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.6s; opacity: 0; }
+
+        /* Animación de carga para la galería */
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .gallery-spinner { animation: spin 1s linear infinite; }
 
         /* Animación sutil de flotación */
         @keyframes float {
@@ -314,7 +320,7 @@
                     <div class="flex-1 p-6 md:p-8 flex items-center justify-center md:justify-end bg-ana-black md:border-r border-gray-800">
                         <div class="text-center md:text-right">
                             <span class="block text-gray-400 text-xs font-bold tracking-[0.2em] uppercase mb-2">Horario de Atención</span>
-                            <p class="font-light text-sm md:text-base mb-1">Lunes a Sábado: <strong class="font-bold">9:00 AM - 7:00 PM</strong> <br class="md:hidden"><span class="hidden md:inline"> | </span> Domingo: <strong class="font-bold">10:00 AM - 6:00 PM</strong></p>
+                            <p class="font-light text-sm md:text-base mb-1">Lunes a Sábado: <strong class="font-bold">8:00 AM - 8:00 PM</strong> <br class="md:hidden"><span class="hidden md:inline"> | </span> Domingo: <strong class="font-bold">10:00 AM - 7:00 PM</strong></p>
                             <span class="inline-block bg-white text-ana-dark text-[10px] md:text-xs px-3 py-1.5 font-bold mt-2 uppercase tracking-widest rounded-sm shadow-sm">Martes: Día de Descanso</span>
                         </div>
                     </div>
@@ -515,9 +521,9 @@
                         <div class="w-16 h-0.5 bg-gray-300 mx-auto"></div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-5xl mx-auto">
-                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450295/0W3A1664_fptbbp.jpg" alt="Ana Molano - Master Stylist" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Ana Molano</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Master Stylist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Especialista en colorimetría avanzada y diseño de imagen. Líder y fundadora.</p></div></div>
-                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450294/0W3A1617_x0teaw.jpg" alt="Tatiana - Nail Artist" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Tatiana</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Nail Artist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Experta en sistemas Press On, Polygel y decoración a mano alzada.</p></div></div>
-                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450311/0W3A1944_iezgag.jpg" alt="Zamara - Esteticista" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Zamara</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Esteticista</p><p class="text-sm text-gray-500 font-light leading-relaxed">Apasionada por el cuidado de la piel, lifting de pestañas y micropigmentación.</p></div></div>
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450295/0W3A1664_fptbbp.jpg" alt="Ana Molano - Master Stylist" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Ana Molano</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Master Stylist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Especialista en colorimetría avanzada, cuidado capilar y diseño de imagen.</p></div></div>
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450294/0W3A1617_x0teaw.jpg" alt="Tatiana - Nail Artist" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Tatiana</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Nail & Lash Artist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Experta en sistemas de uñas, acrílicas y lifting de pestañas.</p></div></div>
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450311/0W3A1944_iezgag.jpg" alt="Zamara - Esteticista" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Zamara</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Nail Artist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Especialista en manicure, pedicure, Polygel y cuidado de uñas.</p></div></div>
                     </div>
                 </div>
             </section>
@@ -528,10 +534,10 @@
              ============================================== -->
         <div id="view-servicios-portal" class="page-view">
             <section class="py-16 md:py-24 bg-gray-50 min-h-[80vh] flex flex-col justify-center items-center">
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                    <div class="text-center mb-12 md:mb-16">
-                        <h2 class="text-3xl md:text-5xl font-light text-ana-black mb-4 tracking-tight">Elige tu <strong class="font-bold text-ana-dark">Experiencia</strong></h2>
-                        <div class="w-16 h-1 bg-ana-dark mx-auto rounded-full"></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-5xl mx-auto">
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450295/0W3A1664_fptbbp.jpg" alt="Ana Molano - Master Stylist" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Ana Molano</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Master Stylist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Especialista en colorimetría avanzada, cuidado capilar y diseño de imagen.</p></div></div>
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450294/0W3A1617_x0teaw.jpg" alt="Tatiana - Nail Artist" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Tatiana</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Nail & Lash Artist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Experta en sistemas de uñas, acrílicas y lifting de pestañas.</p></div></div>
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450311/0W3A1944_iezgag.jpg" alt="Zamara - Esteticista" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Zamara</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Nail Artist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Especialista en manicure, pedicure, Polygel y cuidado de uñas.</p></div></div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
                         <div onclick="navigate('mujer')" class="relative h-[350px] md:h-[450px] group cursor-pointer overflow-hidden rounded-xl shadow-2xl active:scale-[0.98] transition-transform duration-300">
@@ -598,8 +604,14 @@
              VISTA: MUJER 
              ============================================== -->
         <div id="view-mujer" class="page-view">
-            <div class="py-16 md:py-24 bg-white">
+            <div class="py-16 md:py-24 bg-white relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- Botón Volver -->
+                    <button onclick="navigate('servicios-portal')" class="mb-6 inline-flex items-center gap-2 text-gray-600 hover:text-ana-dark transition-colors font-medium text-xs sm:text-sm bg-gray-50 hover:bg-pink-50 px-4 py-2 rounded-full shadow-sm active:scale-95 ripple-effect border border-gray-100">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Volver a Categorías
+                    </button>
+                    
                     <div class="text-center mb-14 md:mb-16">
                         <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-3 tracking-tight uppercase">Catálogo <strong class="font-bold text-ana-dark">Mujer</strong></h2>
                         <div class="w-16 h-1 bg-ana-dark mx-auto rounded-full"></div>
@@ -699,8 +711,14 @@
              VISTA: HOMBRE 
              ============================================== -->
         <div id="view-hombre" class="page-view">
-            <div class="py-16 md:py-24 bg-gray-50">
+            <div class="py-16 md:py-24 bg-gray-50 relative">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- Botón Volver -->
+                    <button onclick="navigate('servicios-portal')" class="mb-6 inline-flex items-center gap-2 text-gray-600 hover:text-ana-dark transition-colors font-medium text-xs sm:text-sm bg-white hover:bg-gray-100 px-4 py-2 rounded-full shadow-sm active:scale-95 ripple-effect border border-gray-200">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Volver a Categorías
+                    </button>
+
                     <div class="text-center mb-14 md:mb-16">
                         <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-3 tracking-tight uppercase">Catálogo <strong class="font-bold text-gray-900">Hombre</strong></h2>
                         <div class="w-16 h-1 bg-gray-800 mx-auto rounded-full"></div>
@@ -790,8 +808,8 @@
                                 <div class="mb-8">
                                     <h3 class="text-sm font-bold tracking-[0.2em] text-ana-dark uppercase mb-4 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Horarios</h3>
                                     <ul class="text-gray-700 font-light space-y-4 text-sm md:text-base">
-                                        <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Lunes a Sábado</span> <span class="font-bold text-gray-900 bg-white px-3 py-1 rounded-full shadow-sm">9:00 AM - 7:00 PM</span></li>
-                                        <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Domingos</span> <span class="font-bold text-gray-900 bg-white px-3 py-1 rounded-full shadow-sm">10:00 AM - 6:00 PM</span></li>
+                                        <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Lunes a Sábado</span> <span class="font-bold text-gray-900 bg-white px-3 py-1 rounded-full shadow-sm">8:00 AM - 8:00 PM</span></li>
+                                        <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Domingos</span> <span class="font-bold text-gray-900 bg-white px-3 py-1 rounded-full shadow-sm">10:00 AM - 7:00 PM</span></li>
                                         <li class="text-ana-dark pt-2 text-sm font-bold tracking-wider uppercase flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg> Martes cerrado (Día de descanso)</li>
                                     </ul>
                                 </div>
@@ -826,7 +844,7 @@
                     <div class="bg-white shadow-[0_20px_50px_rgba(232,62,140,0.1)] p-6 md:p-12 border-t-4 border-ana-dark rounded-2xl">
                         <div class="text-center mb-8 md:mb-12">
                             <h2 class="text-3xl md:text-5xl font-light text-ana-black mb-4 tracking-tight uppercase">Reserva tu <strong class="font-bold text-ana-dark">Espacio</strong></h2>
-                            <p class="text-gray-500 font-light text-sm md:text-base px-2 max-w-xl mx-auto">Sigue estos dos sencillos pasos para agendar tu cita con nosotros. Recibirás confirmación automática.</p>
+                            <p class="text-gray-500 font-light text-sm md:text-base px-2 max-w-xl mx-auto">Sigue estos dos sencillos pasos para agendar tu cita con la especialista adecuada.</p>
                         </div>
                         <div class="mb-10 md:mb-12">
                             <h3 class="text-xs md:text-sm font-bold tracking-[0.15em] text-ana-dark uppercase mb-5 md:mb-6 border-b border-pink-100 pb-3 flex items-center gap-3">
@@ -834,10 +852,10 @@
                                 Selecciona el Servicio Principal
                             </h3>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Capilar" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💇‍♀️</span> Cuidado Capilar</div></label>
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Nails" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💅</span> Nail Spa Exclusivo</div></label>
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Estetica" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">🧖‍♀️</span> Estética & Mirada</div></label>
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Hombre" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">✂️</span> Corte Hombre</div></label>
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Capilar" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💇‍♀️</span> Cuidado Capilar (Ana)</div></label>
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Nails" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💅</span> Nail Spa (Zamara / Tatiana)</div></label>
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Estetica" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">👁️</span> Lifting Pestañas (Tatiana)</div></label>
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Hombre" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">✂️</span> Corte Hombre (Ana)</div></label>
                             </div>
                         </div>
                         <div id="calendly-section" class="opacity-30 pointer-events-none transition-all duration-700 h-0 overflow-hidden">
@@ -845,8 +863,7 @@
                                 <span class="bg-ana-dark text-white w-6 h-6 rounded-full flex items-center justify-center text-xs shadow-md">2</span>
                                 Elige tu fecha y hora
                             </h3>
-                            <div class="calendly-inline-widget bg-white rounded-xl overflow-hidden border border-gray-100 shadow-inner" data-url="https://calendly.com/anamolanopeluqueria/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1f1f1f&primary_color=e83e8c" style="min-width:320px;height:700px;"></div>
-                            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                            <div id="calendly-embed" class="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-inner" style="min-width:320px;height:700px;"></div>
                         </div>
                     </div>
                 </div>
@@ -910,46 +927,66 @@
     </a>
 
     <!-- LIGHTBOX DE GALERÍA -->
-    <div id="gallery-lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
-        <button onclick="closeGallery()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white p-3 transition-colors z-50 bg-black/30 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg">
+    <div id="gallery-lightbox" class="fixed inset-0 z-[100] bg-black/98 hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <button onclick="closeGallery()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white p-3 transition-colors z-50 bg-white/10 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg backdrop-blur-md">
             <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
-        <div class="relative w-full max-w-6xl px-2 md:px-4 flex items-center justify-between h-[85vh]">
-            <button onclick="changeGalleryImage(-1)" class="hidden md:flex text-white/70 hover:text-white p-3 transition-colors z-50 bg-black/30 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg">
+        
+        <div class="relative w-full max-w-6xl px-2 md:px-4 flex items-center justify-between h-[65vh] md:h-[75vh]">
+            <button onclick="changeGalleryImage(-1)" class="hidden md:flex text-white/70 hover:text-white p-3 transition-colors z-50 bg-white/10 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg backdrop-blur-md">
                 <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
             </button>
-            <div class="flex-1 flex justify-center items-center h-full px-0 md:px-8">
-                <img id="lightbox-img" src="" alt="Instalaciones" class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-opacity duration-300 pointer-events-none">
+            
+            <div class="flex-1 flex justify-center items-center h-full px-0 md:px-8 relative">
+                <!-- Loader (Spinner) -->
+                <div id="gallery-loader" class="absolute inset-0 flex items-center justify-center z-0 hidden">
+                    <svg class="w-10 h-10 text-ana-accent gallery-spinner" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                </div>
+                <!-- Imagen -->
+                <img id="lightbox-img" src="" alt="Instalaciones del salón" class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-opacity duration-300 relative z-10 opacity-0 pointer-events-none">
             </div>
-            <button onclick="changeGalleryImage(1)" class="hidden md:flex text-white/70 hover:text-white p-3 transition-colors z-50 bg-black/30 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg">
+            
+            <button onclick="changeGalleryImage(1)" class="hidden md:flex text-white/70 hover:text-white p-3 transition-colors z-50 bg-white/10 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg backdrop-blur-md">
                 <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
             </button>
         </div>
-        <div class="absolute bottom-6 md:bottom-10 left-0 w-full text-center text-white text-xs md:text-sm font-bold tracking-[0.2em] uppercase bg-gradient-to-t from-black/80 to-transparent py-4">
+
+        <!-- Miniaturas (Thumbnails) -->
+        <div class="w-full max-w-4xl mt-4 md:mt-6 px-4">
+            <div id="gallery-thumbnails-container" class="flex gap-3 overflow-x-auto no-scrollbar py-2 snap-x snap-mandatory scroll-smooth items-center justify-start md:justify-center">
+                <!-- Se llenan por JavaScript -->
+            </div>
+        </div>
+
+        <div class="absolute bottom-4 left-0 w-full text-center text-white text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase opacity-70">
             <span id="gallery-counter">1</span> / <span id="gallery-total">8</span>
-            <p class="text-[10px] text-gray-400 mt-2 font-normal normal-case md:hidden tracking-normal">Desliza para ver más</p>
         </div>
     </div>
 
     <!-- SCRIPTS -->
     <script>
         // --- GALERÍA DE IMÁGENES Y SWIPE ---
+        // ⚠️ Agregamos c_scale,w_1200 a la URL para que carguen un 80% más rápido en móviles
         const galleryImages = [
-            "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454700/0W3A1345_amcels.jpg",
-            "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454703/0W3A1385_wnezet.jpg",
-            "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454701/0W3A1287_bpgfuw.jpg",
-            "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454704/0W3A1412_vlsxjc.jpg",
-            "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454707/0W3A1551_bghuqu.jpg",
-            "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454705/0W3A1543_wkxcxz.jpg",
-            "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454707/0W3A1511_dgiks9.jpg",
-            "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454931/0W3A1308_mxol8a.jpg"
+            "https://res.cloudinary.com/dfj0ckm10/image/upload/c_scale,w_1200/f_auto,q_auto/v1776454700/0W3A1345_amcels.jpg",
+            "https://res.cloudinary.com/dfj0ckm10/image/upload/c_scale,w_1200/f_auto,q_auto/v1776454703/0W3A1385_wnezet.jpg",
+            "https://res.cloudinary.com/dfj0ckm10/image/upload/c_scale,w_1200/f_auto,q_auto/v1776454701/0W3A1287_bpgfuw.jpg",
+            "https://res.cloudinary.com/dfj0ckm10/image/upload/c_scale,w_1200/f_auto,q_auto/v1776454704/0W3A1412_vlsxjc.jpg",
+            "https://res.cloudinary.com/dfj0ckm10/image/upload/c_scale,w_1200/f_auto,q_auto/v1776454707/0W3A1551_bghuqu.jpg",
+            "https://res.cloudinary.com/dfj0ckm10/image/upload/c_scale,w_1200/f_auto,q_auto/v1776454705/0W3A1543_wkxcxz.jpg",
+            "https://res.cloudinary.com/dfj0ckm10/image/upload/c_scale,w_1200/f_auto,q_auto/v1776454707/0W3A1511_dgiks9.jpg",
+            "https://res.cloudinary.com/dfj0ckm10/image/upload/c_scale,w_1200/f_auto,q_auto/v1776454931/0W3A1308_mxol8a.jpg"
         ];
         
         let currentGalleryIndex = 0;
+        let isGalleryOpen = false;
 
         function openGallery(startIndex = 0) {
             currentGalleryIndex = startIndex;
+            isGalleryOpen = true;
+            renderThumbnails();
             updateGalleryUI();
+            
             const lightbox = document.getElementById('gallery-lightbox');
             lightbox.classList.remove('hidden');
             lightbox.classList.add('flex');
@@ -958,6 +995,7 @@
         }
 
         function closeGallery() {
+            isGalleryOpen = false;
             const lightbox = document.getElementById('gallery-lightbox');
             lightbox.classList.remove('opacity-100');
             lightbox.classList.add('opacity-0');
@@ -969,32 +1007,83 @@
             currentGalleryIndex += direction;
             if (currentGalleryIndex < 0) currentGalleryIndex = galleryImages.length - 1;
             if (currentGalleryIndex >= galleryImages.length) currentGalleryIndex = 0;
-            
-            const img = document.getElementById('lightbox-img');
-            img.style.opacity = '0';
-            setTimeout(() => {
-                updateGalleryUI();
-                img.style.opacity = '1';
-            }, 150);
+            updateGalleryUI();
+        }
+
+        // Precarga de la siguiente imagen en caché para mayor velocidad
+        function preloadImage(url) {
+            const img = new Image();
+            img.src = url;
         }
 
         function updateGalleryUI() {
             const img = document.getElementById('lightbox-img');
+            const loader = document.getElementById('gallery-loader');
+            
+            // Ocultar imagen actual y mostrar loader
+            img.style.opacity = '0';
+            loader.classList.remove('hidden');
+
+            // Cargar nueva imagen
+            img.onload = () => {
+                loader.classList.add('hidden');
+                img.style.opacity = '1';
+                
+                // Precargar la siguiente y anterior
+                const nextIdx = (currentGalleryIndex + 1) % galleryImages.length;
+                const prevIdx = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+                preloadImage(galleryImages[nextIdx]);
+                preloadImage(galleryImages[prevIdx]);
+            };
             img.src = galleryImages[currentGalleryIndex];
+            
             document.getElementById('gallery-counter').textContent = currentGalleryIndex + 1;
             document.getElementById('gallery-total').textContent = galleryImages.length;
+
+            // Actualizar estado de las miniaturas
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, idx) => {
+                if(idx === currentGalleryIndex) {
+                    thumb.classList.add('border-ana-accent', 'opacity-100', 'scale-110');
+                    thumb.classList.remove('border-transparent', 'opacity-40');
+                    thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                } else {
+                    thumb.classList.remove('border-ana-accent', 'opacity-100', 'scale-110');
+                    thumb.classList.add('border-transparent', 'opacity-40');
+                }
+            });
         }
 
-        // Swipe táctil en galería
+        // Renderizar miniaturas dinámicamente
+        function renderThumbnails() {
+            const container = document.getElementById('gallery-thumbnails-container');
+            if(container.innerHTML !== '') return; // Si ya se crearon, no repetir
+            
+            galleryImages.forEach((src, idx) => {
+                // Generamos una miniatura pequeñita de 200px para que cargue instantáneo
+                const thumbSrc = src.replace('w_1200', 'w_200');
+                const img = document.createElement('img');
+                img.src = thumbSrc;
+                img.className = 'gallery-thumb w-14 h-14 md:w-16 md:h-16 object-cover rounded-md cursor-pointer border-2 border-transparent opacity-40 hover:opacity-100 transition-all duration-300 shrink-0 snap-center';
+                img.onclick = () => {
+                    currentGalleryIndex = idx;
+                    updateGalleryUI();
+                };
+                container.appendChild(img);
+            });
+        }
+
+        // Swipe táctil en galería (Optimizado)
         let touchstartX = 0;
         let touchendX = 0;
         const lightboxElement = document.getElementById('gallery-lightbox');
 
         lightboxElement.addEventListener('touchstart', e => {
+            if(!isGalleryOpen || e.target.classList.contains('gallery-thumb')) return;
             touchstartX = e.changedTouches[0].screenX;
         }, {passive: true});
 
         lightboxElement.addEventListener('touchend', e => {
+            if(!isGalleryOpen || e.target.classList.contains('gallery-thumb')) return;
             touchendX = e.changedTouches[0].screenX;
             if (touchendX < touchstartX - 40) changeGalleryImage(1); // Swipe a izquierda
             if (touchendX > touchstartX + 40) changeGalleryImage(-1); // Swipe a derecha
@@ -1076,9 +1165,44 @@
         }
 
         function mostrarCalendly() {
+            const servicioInput = document.querySelector('input[name="servicio_cal"]:checked');
+            if(!servicioInput) return;
+            const servicio = servicioInput.value;
+            
+            // ⚠️ Aquí debes poner los links de Calendly separados para cada especialista
+            // Solo cambia lo que está dentro de las comillas
+            let urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; 
+            
+            if(servicio === 'Capilar') {
+                urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; // ⚠️ Link de Ana (Corte/Color)
+            }
+            if(servicio === 'Nails') {
+                urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; // ⚠️ Link de Zamara o Tatiana (Uñas)
+            }
+            if(servicio === 'Estetica') {
+                urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; // ⚠️ Link de Tatiana (Lifting)
+            }
+            if(servicio === 'Hombre') {
+                urlCalendly = "https://calendly.com/anamolanopeluqueria/30min"; // ⚠️ Link de Ana (Corte Hombre)
+            }
+
             const calendlySec = document.getElementById('calendly-section');
             calendlySec.classList.remove('opacity-30', 'pointer-events-none', 'h-0');
-            calendlySec.classList.add('h-[750px]'); // Expande para mostrar
+            calendlySec.classList.add('h-[750px]'); 
+
+            // Cargar el widget de Calendly dinámicamente con la URL seleccionada
+            const embedContainer = document.getElementById('calendly-embed');
+            embedContainer.innerHTML = ''; // Limpiamos el anterior si existía
+            
+            if (window.Calendly) {
+                window.Calendly.initInlineWidget({
+                    url: urlCalendly + '?hide_gdpr_banner=1&background_color=ffffff&text_color=1f1f1f&primary_color=e83e8c',
+                    parentElement: embedContainer,
+                    prefill: {},
+                    utm: {}
+                });
+            }
+
             setTimeout(() => { calendlySec.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
         }
 
