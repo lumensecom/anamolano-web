@@ -60,19 +60,35 @@
         .input-minimalista { background-color: transparent; border: 1px solid #e5e7eb; border-radius: 0px; padding: 0.75rem 1rem; transition: all 0.3s ease; }
         .input-minimalista:focus { outline: none; border-color: #e83e8c; box-shadow: none; }
         .service-card:hover .service-img-overlay { background-color: rgba(0,0,0,0.1); }
-        .page-view { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .page-view { display: none; animation: fadeInView 0.5s ease-out; }
         .page-view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInView { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .zoom-img { transition: transform 0.7s ease; }
         .group:hover .zoom-img { transform: scale(1.05); }
         .bono-shadow { box-shadow: -10px 15px 30px rgba(0,0,0,0.15); }
         
         /* Animación fluida "App-like" para el carrusel */
-        .carousel-track { transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .carousel-track { transition: transform 0.7s cubic-bezier(0.25, 1, 0.3, 1); }
         
         .time-pill input:checked + div { background-color: #e83e8c !important; color: white !important; border-color: #e83e8c !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Despliegue del Menú Móvil Súper Suave */
+        #mobile-menu {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-origin: top;
+        }
+        .menu-open {
+            opacity: 1 !important;
+            transform: scaleY(1) translateY(0) !important;
+            pointer-events: auto !important;
+        }
+        .menu-closed {
+            opacity: 0 !important;
+            transform: scaleY(0.95) translateY(-10px) !important;
+            pointer-events: none !important;
+        }
 
         /* Animación para el fondo del agendamiento */
         @keyframes blob {
@@ -87,9 +103,18 @@
         /* Efecto de movimiento suave (Ken Burns) Mejorado para Móvil */
         @keyframes kenBurns {
             0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.12) translate(-1%, -1%); }
+            100% { transform: scale(1.15) translate(-1.5%, -1.5%); }
         }
-        .animate-kenburns { animation: kenBurns 15s ease-in-out infinite alternate; }
+        .animate-kenburns { animation: kenBurns 18s ease-in-out infinite alternate forwards; }
+
+        /* Animación de entrada para los textos del hero */
+        @keyframes heroSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-anim-1 { animation: heroSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.2s; opacity: 0; }
+        .hero-anim-2 { animation: heroSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.4s; opacity: 0; }
+        .hero-anim-3 { animation: heroSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.6s; opacity: 0; }
 
         /* Animación sutil de flotación */
         @keyframes float {
@@ -102,25 +127,18 @@
         /* Animación de pulso continuo para los CTA en móviles */
         @keyframes pulseSoft {
             0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(4px); }
+            50% { transform: translateX(5px); }
         }
         .mobile-pulse-arrow svg { animation: pulseSoft 2s infinite ease-in-out; }
 
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                transition-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-            }
-        }
-
+        /* SCROLL REVEAL OPTIMIZADO PARA MÓVIL */
         .reveal {
-            opacity: 0; transform: translateY(28px);
-            transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+            opacity: 0; transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
             will-change: opacity, transform;
         }
-        .reveal.r-left  { transform: translateX(-28px); }
-        .reveal.r-right { transform: translateX(28px); }
+        .reveal.r-left  { transform: translateX(-35px) translateY(0); }
+        .reveal.r-right { transform: translateX(35px) translateY(0); }
         .reveal.visible { opacity: 1 !important; transform: none !important; }
 
         .nav-line { position:relative; display:inline-block; }
@@ -134,13 +152,14 @@
         .btn-mag { transition: transform 0.2s cubic-bezier(0.22,1,0.36,1), box-shadow 0.2s ease; }
         .btn-mag:hover { box-shadow: 0 8px 28px rgba(232,62,140,0.3); }
         
+        /* Efecto Ripple Táctil */
         .ripple-effect { position:relative; overflow:hidden; }
-        .ripple-effect::before {
-            content:''; position:absolute; inset:0; background:rgba(255,255,255,0.18);
+        .ripple-effect::after {
+            content:''; position:absolute; inset:0; background:rgba(255,255,255,0.25);
             transform:scale(0); opacity:0; transition:transform 0.4s ease, opacity 0.4s ease;
-            border-radius:inherit;
+            border-radius:inherit; pointer-events:none;
         }
-        .ripple-effect:active::before { transform:scale(1); opacity:1; transition:0s; }
+        .ripple-effect:active::after { transform:scale(1); opacity:1; transition:0s; }
 
         /* Mejora en la animación de las listas de servicios */
         .price-row-anim { transition: all 0.3s cubic-bezier(0.22,1,0.36,1); border-radius:4px; margin-bottom: 2px;}
@@ -149,23 +168,32 @@
         .price-row-anim .w-1\.5 { transition: transform 0.3s cubic-bezier(0.22,1,0.36,1); }
 
         .card-lift { transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), box-shadow 0.4s ease; }
-        .card-lift:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(232,62,140,0.06); }
+        .card-lift:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(232,62,140,0.08); }
         
         .wa-pulse { animation: waPulse 3s ease-in-out infinite; }
         @keyframes waPulse {
             0%,100% { box-shadow:0 10px 30px rgba(37,211,102,0.4); }
-            50%      { box-shadow:0 10px 40px rgba(37,211,102,0.6),0 0 0 7px rgba(37,211,102,0.1); }
+            50%      { box-shadow:0 10px 45px rgba(37,211,102,0.6),0 0 0 8px rgba(37,211,102,0.15); }
         }
-        .nav-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+        .nav-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+        
+        /* Cursor de escritura dinámico */
+        .typing-cur {
+            display:inline-block; width:3px; height:0.9em;
+            background:white; margin-left:4px; vertical-align:middle;
+            animation:tcBlink 0.9s step-end infinite;
+        }
+        @keyframes tcBlink { 50%{opacity:0;} }
     </style>
 </head>
 <body class="bg-white text-gray-900 font-sans antialiased pt-[100px] md:pt-[150px] flex flex-col min-h-screen">
 
-    <header class="fixed top-0 w-full z-50">
-        <div class="bg-ana-dark text-white py-2 px-3 sm:px-6 lg:px-8">
+    <header class="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md">
+        <!-- Top Bar -->
+        <div class="bg-ana-dark text-white py-2 px-3 sm:px-6 lg:px-8 relative z-50">
             <div class="max-w-7xl mx-auto flex flex-row justify-between items-center text-[10px] md:text-xs tracking-widest uppercase font-semibold">
                 <div class="flex items-center gap-2 md:gap-4">
-                    <a href="tel:+573133292214" class="flex items-center gap-1 hover:text-pink-200 transition-colors active:scale-95">
+                    <a href="tel:+573133292214" class="flex items-center gap-1 hover:text-pink-200 transition-colors active:scale-95 ripple-effect">
                         <svg class="w-3.5 h-3.5 md:w-4 md:h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.487 17.14l-4.065-3.696a1.001 1.001 0 00-1.391.043l-2.393 2.461c-.576-.11-1.734-.471-2.926-1.66-1.192-1.193-1.553-2.354-1.66-2.926l2.459-2.394a1 1 0 00.043-1.391L6.859 3.513a1 1 0 00-1.391-.087l-2.17 1.861a1 1 0 00-.29.649c-.015.25-.301 6.172 4.291 10.766C11.305 20.707 16.323 21 16.576 21a1 1 0 00.65-.29l1.86-2.171a.999.999 0 00-.086-1.399z"/></svg>
                         <span class="hidden sm:inline">(+57) </span>313 329 2214
                     </a>
@@ -174,52 +202,56 @@
                 </div>
                 <div class="flex items-center gap-3 md:gap-3">
                     <span class="hidden sm:inline text-pink-200">Síguenos:</span>
-                    <a href="https://www.instagram.com/anamolanopeluqueria" target="_blank" aria-label="Instagram" class="hover:text-pink-200 transition-colors active:scale-90"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-                    <a href="https://www.facebook.com/anamolanopeluqueria" target="_blank" aria-label="Facebook" class="hover:text-pink-200 transition-colors active:scale-90"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                    <a href="https://www.instagram.com/anamolanopeluqueria" target="_blank" aria-label="Instagram" class="hover:text-pink-200 transition-colors active:scale-90 ripple-effect"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                    <a href="https://www.facebook.com/anamolanopeluqueria" target="_blank" aria-label="Facebook" class="hover:text-pink-200 transition-colors active:scale-90 ripple-effect"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
                 </div>
             </div>
         </div>
-        <nav class="w-full bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300 shadow-sm relative z-40">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Main Nav -->
+        <nav class="w-full border-b border-gray-100 transition-all duration-300 shadow-sm relative z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-transparent">
                 <div class="flex justify-between items-center h-16 md:h-24">
-                    <div class="flex-shrink-0 flex items-center cursor-pointer active:scale-95 transition-transform" onclick="navigate('home');">
+                    <div class="flex-shrink-0 flex items-center cursor-pointer active:scale-95 transition-transform" onclick="navigate('home')">
                         <div class="flex flex-col items-center justify-center pt-2 md:pt-0">
                             <span class="font-logo text-3xl md:text-5xl text-ana-black font-bold" style="line-height: 0.8; padding-bottom: 2px;">Ana Molano</span>
                             <span class="text-[7px] md:text-[10px] tracking-[0.3em] text-gray-500 uppercase mt-1">Peluquería & Spa</span>
                         </div>
                     </div>
                     <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
-                        <button onclick="navigate('nosotros');" class="text-xs font-bold tracking-[0.15em] text-gray-500 hover:text-ana-dark uppercase transition-colors">Nosotros</button>
+                        <button onclick="navigate('nosotros')" class="text-xs font-bold tracking-[0.15em] text-gray-500 hover:text-ana-dark uppercase transition-colors">Nosotros</button>
                         <div class="relative group py-6">
-                            <button onclick="navigate('servicios-portal');" class="flex items-center text-xs font-bold tracking-[0.15em] text-gray-500 hover:text-ana-dark uppercase transition-colors">
+                            <button onclick="navigate('servicios-portal')" class="flex items-center text-xs font-bold tracking-[0.15em] text-gray-500 hover:text-ana-dark uppercase transition-colors">
                                 Servicios
                                 <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
-                            <div class="absolute top-full left-0 w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0">
+                            <div class="absolute top-full left-0 w-48 bg-white border border-gray-100 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left -translate-y-2 group-hover:translate-y-0 rounded-b-md overflow-hidden">
                                 <button onclick="navigate('mujer')" class="block w-full text-left px-6 py-4 text-xs tracking-widest text-gray-700 hover:bg-ana-light hover:text-ana-dark uppercase border-b border-gray-50">Para Mujer</button>
                                 <button onclick="navigate('hombre')" class="block w-full text-left px-6 py-4 text-xs tracking-widest text-gray-700 hover:bg-ana-light hover:text-ana-dark uppercase">Para Hombre</button>
                             </div>
                         </div>
-                        <button onclick="navigate('ubicacion');" class="text-xs font-bold tracking-[0.15em] text-gray-500 hover:text-ana-dark uppercase transition-colors">Ubicación</button>
+                        <button onclick="navigate('ubicacion')" class="text-xs font-bold tracking-[0.15em] text-gray-500 hover:text-ana-dark uppercase transition-colors">Ubicación</button>
                         <button onclick="navigate('bonos')" class="text-xs font-bold tracking-[0.15em] text-ana-dark hover:text-ana-accent uppercase transition-colors">Bonos de Regalo</button>
-                        <button onclick="navigate('agendamiento')" class="bg-ana-dark hover:bg-ana-black text-white px-6 py-3 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-300 shadow-md active:scale-95">
+                        <button onclick="navigate('agendamiento')" class="bg-ana-dark hover:bg-ana-black text-white px-6 py-3 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-300 shadow-md active:scale-95 btn-mag ripple-effect rounded-sm">
                             Agendar Cita
                         </button>
                     </div>
                     <div class="md:hidden flex items-center">
-                        <button onclick="toggleMobileMenu()" class="text-gray-900 focus:outline-none p-3 -mr-2 active:scale-90 transition-transform" aria-label="Abrir menú móvil">
-                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                        <button onclick="toggleMobileMenu()" id="mobile-menu-btn" class="text-gray-900 focus:outline-none p-3 -mr-2 active:scale-90 transition-transform" aria-label="Abrir menú móvil">
+                            <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>
                         </button>
                     </div>
                 </div>
             </div>
-            <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-2xl max-h-[80vh] overflow-y-auto z-50">
+            
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 absolute left-0 w-full shadow-2xl z-40 menu-closed">
                 <div class="px-4 pt-2 pb-6 space-y-1">
-                    <button onclick="navigate('nosotros');" class="block w-full text-left px-3 py-4 text-sm font-medium tracking-widest text-gray-900 border-b border-gray-50 uppercase active:bg-gray-50">Nosotros</button>
-                    <button onclick="navigate('servicios-portal')" class="block w-full text-left px-3 py-4 text-sm font-medium tracking-widest text-gray-900 border-b border-gray-50 uppercase active:bg-gray-50">Servicios</button>
-                    <button onclick="navigate('ubicacion');" class="block w-full text-left px-3 py-4 text-sm font-medium tracking-widest text-gray-900 border-b border-gray-50 uppercase active:bg-gray-50">Ubicación</button>
-                    <button onclick="navigate('bonos')" class="block w-full text-left px-3 py-4 text-sm font-medium tracking-widest text-ana-dark border-b border-gray-50 uppercase active:bg-gray-50">Bonos de Regalo</button>
-                    <button onclick="navigate('agendamiento')" class="block w-full text-center mt-4 bg-ana-dark text-white px-3 py-4 text-sm font-bold tracking-widest uppercase shadow-lg active:scale-95 transition-transform">Agendar Cita</button>
+                    <button onclick="navigate('nosotros')" class="block w-full text-left px-3 py-4 text-sm font-bold tracking-widest text-gray-900 border-b border-gray-50 uppercase active:bg-gray-50 ripple-effect">Nosotros</button>
+                    <button onclick="navigate('servicios-portal')" class="block w-full text-left px-3 py-4 text-sm font-bold tracking-widest text-gray-900 border-b border-gray-50 uppercase active:bg-gray-50 ripple-effect">Servicios</button>
+                    <button onclick="navigate('ubicacion')" class="block w-full text-left px-3 py-4 text-sm font-bold tracking-widest text-gray-900 border-b border-gray-50 uppercase active:bg-gray-50 ripple-effect">Ubicación</button>
+                    <button onclick="navigate('bonos')" class="block w-full text-left px-3 py-4 text-sm font-bold tracking-widest text-ana-dark border-b border-gray-50 uppercase active:bg-gray-50 ripple-effect">Bonos de Regalo</button>
+                    <button onclick="navigate('agendamiento')" class="block w-full text-center mt-4 bg-ana-dark text-white px-3 py-4 text-sm font-bold tracking-widest uppercase shadow-lg active:scale-95 transition-transform ripple-effect rounded-sm">Agendar Cita</button>
                 </div>
             </div>
         </nav>
@@ -233,58 +265,62 @@
             <!-- Carrusel Principal -->
             <section class="relative w-full h-[85svh] md:h-[90vh] overflow-hidden group mt-0">
                 <div id="carousel-track" class="flex h-full w-[300%] carousel-track">
+                    <!-- Slide 1 -->
                     <div class="w-1/3 h-full relative flex-shrink-0 bg-black overflow-hidden">
                         <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776449105/0W3A1359_duecdn.jpg" alt="Ana Molano Peluquería" class="w-full h-full object-cover object-center opacity-90 animate-kenburns pointer-events-none">
-                        <div class="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-center px-4 pointer-events-none">
-                            <h2 class="text-white text-3xl md:text-6xl lg:text-7xl font-light mb-2">Un espacio para <br class="md:hidden"><span class="font-semibold border-b-2 md:border-b-4 border-white pb-1">consentirte.</span></h2>
-                            <p class="text-pink-100 text-xs md:text-lg tracking-widest uppercase mt-6 md:mt-4 mb-8">Peluquería, Estética y Spa en Bogotá</p>
-                            <button onclick="navigate('agendamiento')" class="w-full max-w-[280px] md:max-w-none bg-ana-dark text-white hover:bg-ana-accent px-6 md:px-10 py-4 uppercase tracking-widest text-xs md:text-sm font-bold transition-all duration-300 shadow-[0_8px_25px_rgba(232,62,140,0.5)] hover:shadow-[0_12px_35px_rgba(255,115,168,0.6)] active:scale-95 pointer-events-auto">Reserva tu cita</button>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex flex-col justify-center items-center text-center px-4 pointer-events-none">
+                            <h2 class="hero-anim-1 text-white text-3xl md:text-6xl lg:text-7xl font-light mb-2">Un espacio para <br class="md:hidden"><span id="hero-typing" class="font-semibold border-b-2 md:border-b-4 border-white pb-1 text-white">consentirte.</span></h2>
+                            <p class="hero-anim-2 text-pink-100 text-xs md:text-lg tracking-widest uppercase mt-6 md:mt-4 mb-8">Peluquería, Estética y Spa en Bogotá</p>
+                            <button onclick="navigate('agendamiento')" class="hero-anim-3 w-full max-w-[280px] md:max-w-none bg-ana-dark text-white hover:bg-ana-accent px-6 md:px-10 py-4 uppercase tracking-widest text-xs md:text-sm font-bold transition-all duration-300 shadow-[0_8px_25px_rgba(232,62,140,0.5)] hover:shadow-[0_12px_35px_rgba(255,115,168,0.6)] active:scale-95 pointer-events-auto rounded-sm ripple-effect">Reserva tu cita</button>
                         </div>
                     </div>
+                    <!-- Slide 2 -->
                     <div class="w-1/3 h-full relative flex-shrink-0 overflow-hidden">
                         <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776452373/0W3A1704_cvff5q.jpg" alt="Servicio exclusivo de Nail Bar en Bogotá" class="w-full h-full object-cover animate-kenburns pointer-events-none">
-                        <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center md:items-start text-center md:text-left px-4 md:px-24 pointer-events-none">
-                            <h2 class="text-white text-3xl md:text-5xl lg:text-6xl font-light mb-2 leading-tight">Expertos en<br><span class="font-semibold border-b-2 md:border-b-4 border-white pb-1">Nail Bar & Spa.</span></h2>
-                            <button onclick="navigate('servicios-portal')" class="w-full max-w-[280px] md:max-w-none mt-8 md:mt-10 border border-white text-white hover:bg-white hover:text-black px-6 md:px-10 py-4 uppercase tracking-widest text-xs md:text-sm font-bold transition-all duration-300 shadow-lg shadow-black/30 active:scale-95 pointer-events-auto">Ver Servicios</button>
+                        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent flex flex-col justify-center items-center md:items-start text-center md:text-left px-4 md:px-24 pointer-events-none">
+                            <h2 class="text-white text-3xl md:text-5xl lg:text-6xl font-light mb-2 leading-tight drop-shadow-lg">Expertos en<br><span class="font-semibold border-b-2 md:border-b-4 border-white pb-1">Nail Bar & Spa.</span></h2>
+                            <button onclick="navigate('servicios-portal')" class="w-full max-w-[280px] md:max-w-none mt-8 md:mt-10 border border-white text-white hover:bg-white hover:text-black px-6 md:px-10 py-4 uppercase tracking-widest text-xs md:text-sm font-bold transition-all duration-300 shadow-lg active:scale-95 pointer-events-auto rounded-sm ripple-effect">Ver Servicios</button>
                         </div>
                     </div>
+                    <!-- Slide 3 -->
                     <div class="w-1/3 h-full relative flex-shrink-0 overflow-hidden">
                         <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450256/0W3A1841_f8b6mn.jpg" alt="Coloración y cuidado capilar profesional" class="w-full h-full object-cover animate-kenburns pointer-events-none">
-                        <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center md:items-end text-center md:text-right px-4 md:px-24 pointer-events-none">
-                            <h2 class="text-white text-3xl md:text-5xl lg:text-6xl font-light mb-2 leading-tight">La mejor versión de<br><span class="font-semibold border-b-2 md:border-b-4 border-white pb-1">tu cabello.</span></h2>
-                            <button onclick="navigate('agendamiento')" class="w-full max-w-[280px] md:max-w-none mt-8 md:mt-10 border border-white text-white hover:bg-white hover:text-black px-6 md:px-10 py-4 uppercase tracking-widest text-xs md:text-sm font-bold transition-all duration-300 shadow-lg shadow-black/30 active:scale-95 pointer-events-auto">Transforma tu look</button>
+                        <div class="absolute inset-0 bg-gradient-to-l from-black/70 via-black/30 to-transparent flex flex-col justify-center items-center md:items-end text-center md:text-right px-4 md:px-24 pointer-events-none">
+                            <h2 class="text-white text-3xl md:text-5xl lg:text-6xl font-light mb-2 leading-tight drop-shadow-lg">La mejor versión de<br><span class="font-semibold border-b-2 md:border-b-4 border-white pb-1">tu cabello.</span></h2>
+                            <button onclick="navigate('agendamiento')" class="w-full max-w-[280px] md:max-w-none mt-8 md:mt-10 border border-white text-white hover:bg-white hover:text-black px-6 md:px-10 py-4 uppercase tracking-widest text-xs md:text-sm font-bold transition-all duration-300 shadow-lg active:scale-95 pointer-events-auto rounded-sm ripple-effect">Transforma tu look</button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Flechas visibles en móvil -->
-                <button onclick="prevSlide()" class="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-white border border-white/50 hover:bg-white hover:text-black transition-colors z-20 backdrop-blur-sm active:scale-90 bg-black/20 md:bg-transparent rounded-full md:rounded-none" aria-label="Anterior">
-                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
+                <!-- Flechas visibles en móvil y desktop -->
+                <button onclick="prevSlide()" class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white border border-white/40 hover:bg-white hover:text-black transition-all duration-300 z-20 backdrop-blur-md active:scale-90 bg-black/20 hover:bg-white rounded-full shadow-lg" aria-label="Anterior">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                 </button>
-                <button onclick="nextSlide()" class="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center text-white border border-white/50 hover:bg-white hover:text-black transition-colors z-20 backdrop-blur-sm active:scale-90 bg-black/20 md:bg-transparent rounded-full md:rounded-none" aria-label="Siguiente">
-                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+                <button onclick="nextSlide()" class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center text-white border border-white/40 hover:bg-white hover:text-black transition-all duration-300 z-20 backdrop-blur-md active:scale-90 bg-black/20 hover:bg-white rounded-full shadow-lg" aria-label="Siguiente">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </button>
                 
-                <div class="absolute bottom-6 md:bottom-8 left-1/2 -translate-x-1/2 flex space-x-4 md:space-x-3 z-20">
-                    <button onclick="goToSlide(0)" class="carousel-dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white transition-all duration-300"></button>
-                    <button onclick="goToSlide(1)" class="carousel-dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300"></button>
-                    <button onclick="goToSlide(2)" class="carousel-dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white/40 hover:bg-white/70 transition-all duration-300"></button>
+                <!-- Dots -->
+                <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-20">
+                    <button onclick="goToSlide(0)" class="carousel-dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white transition-all duration-300 shadow-md"></button>
+                    <button onclick="goToSlide(1)" class="carousel-dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300 shadow-md"></button>
+                    <button onclick="goToSlide(2)" class="carousel-dot w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-white/40 hover:bg-white/80 transition-all duration-300 shadow-md"></button>
                 </div>
             </section>
 
             <!-- Barra Contacto -->
-            <section class="w-full bg-ana-black text-white border-t-4 border-ana-dark">
+            <section class="w-full bg-ana-black text-white border-t-4 border-ana-dark shadow-2xl z-30 relative">
                 <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row">
                     <div class="flex-1 p-6 md:p-8 flex items-center justify-center md:justify-end bg-ana-black md:border-r border-gray-800">
                         <div class="text-center md:text-right">
                             <span class="block text-gray-400 text-xs font-bold tracking-[0.2em] uppercase mb-2">Horario de Atención</span>
                             <p class="font-light text-sm md:text-base mb-1">Lunes a Sábado: <strong class="font-bold">9:00 AM - 7:00 PM</strong> <br class="md:hidden"><span class="hidden md:inline"> | </span> Domingo: <strong class="font-bold">10:00 AM - 6:00 PM</strong></p>
-                            <span class="inline-block bg-white text-ana-dark text-[10px] md:text-xs px-3 py-1.5 font-bold mt-2 uppercase tracking-widest rounded-sm">Martes: Día de Descanso</span>
+                            <span class="inline-block bg-white text-ana-dark text-[10px] md:text-xs px-3 py-1.5 font-bold mt-2 uppercase tracking-widest rounded-sm shadow-sm">Martes: Día de Descanso</span>
                         </div>
                     </div>
                     <div class="flex-1 p-6 md:p-8 flex flex-col items-center justify-center bg-[#1a1a1a]">
                         <span class="block text-gray-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">Reserva tu cita hoy</span>
-                        <a href="https://wa.me/573133292214?text=¡Hola!%20✨%20Me%20encantaría%20agendar%20una%20cita%20con%20ustedes.%20¿Me%20pueden%20ayudar%20con%20los%20horarios%20disponibles?%20💇‍♀️💅" target="_blank" class="bg-[#25D366] hover:bg-green-600 transition-all transform hover:scale-105 active:scale-95 px-6 md:px-8 py-3 md:py-4 rounded-full flex items-center gap-2 md:gap-3 text-xs md:text-sm font-bold shadow-lg w-full max-w-[280px] md:max-w-xs justify-center">
+                        <a href="https://wa.me/573133292214?text=¡Hola!%20✨%20Me%20encantaría%20agendar%20una%20cita%20con%20ustedes.%20¿Me%20pueden%20ayudar%20con%20los%20horarios%20disponibles?%20💇‍♀️💅" target="_blank" class="bg-[#25D366] hover:bg-green-600 transition-all transform hover:scale-105 active:scale-95 px-6 md:px-8 py-3 md:py-4 rounded-full flex items-center gap-2 md:gap-3 text-xs md:text-sm font-bold shadow-lg w-full max-w-[280px] md:max-w-xs justify-center ripple-effect btn-mag">
                             <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
                             WhatsApp
                         </a>
@@ -293,38 +329,38 @@
             </section>
 
             <!-- Acerca de Nosotros Home -->
-            <section id="nosotros-home" class="py-16 md:py-20 bg-gray-50">
+            <section id="nosotros-home" class="py-16 md:py-24 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
                         <div class="order-2 md:order-1 relative">
-                            <div class="w-full aspect-[9/16] shadow-[0_10px_30px_rgba(0,0,0,0.1)] rounded-sm overflow-hidden relative bg-black cursor-pointer group" onclick="openGallery()">
+                            <div class="w-full aspect-[9/16] shadow-[0_15px_40px_rgba(0,0,0,0.12)] rounded-lg overflow-hidden relative bg-black cursor-pointer group" onclick="openGallery()">
                                 <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450333/0W3A2011_xtfptm.jpg" alt="Equipo de Ana Molano Peluquería" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="bg-ana-dark/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase flex items-center gap-2 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                                    <div class="bg-ana-dark/90 backdrop-blur-sm text-white px-5 py-3 rounded-full text-xs font-bold tracking-widest uppercase flex items-center gap-2 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-y-0 translate-y-4 duration-300">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
                                         Ver fotos
                                     </div>
                                 </div>
                             </div>
-                            <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-ana-dark text-white p-4 md:p-6 shadow-xl z-10 hidden sm:block pointer-events-none">
-                                <span class="block text-2xl md:text-3xl font-bold">100%</span>
-                                <span class="block text-[10px] md:text-xs uppercase tracking-widest">Profesional</span>
+                            <div class="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-ana-dark text-white p-5 md:p-8 shadow-xl z-10 hidden sm:block pointer-events-none rounded-sm">
+                                <span class="block text-3xl md:text-4xl font-bold leading-none">100%</span>
+                                <span class="block text-[10px] md:text-xs uppercase tracking-widest mt-1">Profesional</span>
                             </div>
                         </div>
                         <div class="order-1 md:order-2 text-center md:text-left">
                             <h4 class="text-ana-dark tracking-[0.2em] text-xs md:text-sm font-bold uppercase mb-2">Acerca de la marca</h4>
                             <h2 class="text-3xl md:text-5xl font-light text-ana-black mb-6 md:mb-8 tracking-tight">ANA MOLANO <br/><span class="font-bold">PELUQUERÍA</span></h2>
                             <p class="text-gray-600 font-light leading-relaxed mb-6 text-sm md:text-base">Somos un salón de belleza y distribuidora enfocado en resaltar tu mejor versión. Combinamos la técnica, la relajación y el arte del color para brindarte experiencias únicas en estética facial, capilar y spa de uñas.</p>
-                            <div class="bg-ana-light p-5 md:p-6 border-l-4 border-ana-dark mb-8 relative overflow-hidden text-left">
+                            <div class="bg-ana-light p-6 md:p-8 border-l-4 border-ana-dark mb-8 relative overflow-hidden text-left rounded-r-sm">
                                 <h3 class="font-bold text-ana-dark uppercase tracking-widest text-xs md:text-sm mb-2 relative z-10">📍 Nuestra Ubicación</h3>
-                                <p class="text-gray-700 font-medium text-xs md:text-sm relative z-10 leading-relaxed">Visítanos en nuestras instalaciones, diseñadas especialmente para brindarte la comodidad y tranquilidad que mereces.<br><br><strong class="text-ana-black">Puente Aranda, Cra. 43c #5-84</strong><br>Nueva Primavera, Bogotá <br><span class="text-[10px] sm:text-xs text-gray-500 mt-1 inline-block">(A mano izquierda de la Distribuidora Olmos)</span><br><br>¡Te esperamos!</p>
+                                <p class="text-gray-700 font-medium text-xs md:text-sm relative z-10 leading-relaxed">Visítanos en nuestras instalaciones, diseñadas especialmente para brindarte la comodidad y tranquilidad que mereces.<br><br><strong class="text-ana-black text-sm">Puente Aranda, Cra. 43c #5-84</strong><br>Nueva Primavera, Bogotá <br><span class="text-[10px] sm:text-xs text-gray-500 mt-1 inline-block italic">(A mano izquierda de la Distribuidora Olmos)</span><br><br>¡Te esperamos!</p>
                             </div>
                             <div class="flex flex-col sm:flex-row gap-4">
-                                <button onclick="openGallery()" class="w-full sm:w-auto border border-ana-dark bg-ana-dark text-white hover:bg-ana-accent hover:border-ana-accent px-8 py-4 md:py-3 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 shadow-lg flex justify-center items-center gap-2">
+                                <button onclick="openGallery()" class="w-full sm:w-auto border border-ana-dark bg-ana-dark text-white hover:bg-ana-accent hover:border-ana-accent px-8 py-4 md:py-3 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 shadow-[0_8px_20px_rgba(232,62,140,0.3)] flex justify-center items-center gap-2 rounded-sm ripple-effect">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     Ver Instalaciones
                                 </button>
-                                <button onclick="navigate('nosotros')" class="w-full sm:w-auto border border-ana-black text-ana-black hover:bg-ana-black hover:text-white px-8 py-4 md:py-3 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95">Conoce a nuestro equipo</button>
+                                <button onclick="navigate('nosotros')" class="w-full sm:w-auto border-2 border-ana-black text-ana-black hover:bg-ana-black hover:text-white px-8 py-4 md:py-3 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 rounded-sm ripple-effect">Conoce a nuestro equipo</button>
                             </div>
                         </div>
                     </div>
@@ -332,77 +368,78 @@
             </section>
 
             <!-- Bonos Home -->
-            <section class="py-12 md:py-16 bg-pink-50 relative overflow-hidden border-t border-pink-100">
+            <section class="py-16 md:py-24 bg-pink-50 relative overflow-hidden border-t border-pink-100">
+                <div class="absolute -right-20 -top-20 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob pointer-events-none"></div>
                 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
                     <div class="md:w-1/2 text-center md:text-left">
-                        <h2 class="text-2xl md:text-3xl font-light text-ana-black mb-4">Regala <strong class="font-bold text-ana-dark">Belleza y Relajación</strong></h2>
-                        <p class="text-gray-600 font-light mb-6 md:mb-8 text-sm md:text-base leading-relaxed">El regalo perfecto para esa persona especial. Un momento de cuidado y renovación en manos de profesionales.</p>
-                        <button onclick="navigate('bonos')" class="w-full md:w-auto bg-ana-dark text-white hover:bg-ana-black px-8 py-4 md:py-3 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-300 shadow-[0_8px_20px_rgba(232,62,140,0.3)] active:scale-95">Adquiere tu bono aquí</button>
+                        <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-4">Regala <strong class="font-bold text-ana-dark">Belleza y Relajación</strong></h2>
+                        <p class="text-gray-600 font-light mb-8 text-sm md:text-base leading-relaxed">El regalo perfecto para esa persona especial. Un momento de cuidado y renovación en manos de profesionales.</p>
+                        <button onclick="navigate('bonos')" class="w-full md:w-auto bg-ana-dark text-white hover:bg-ana-black px-10 py-4 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 shadow-[0_10px_25px_rgba(232,62,140,0.3)] active:scale-95 rounded-sm ripple-effect btn-mag">Adquiere tu bono aquí</button>
                     </div>
                 </div>
             </section>
 
             <!-- Tratamientos Estrella -->
-            <section class="py-16 md:py-20 bg-white border-t border-gray-100">
+            <section class="py-20 md:py-24 bg-white border-t border-gray-100">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12 md:mb-16">
-                        <h2 class="text-2xl md:text-4xl font-light text-ana-black mb-3 md:mb-4 tracking-tight uppercase">Tratamientos Estrella</h2>
-                        <div class="w-12 h-0.5 bg-ana-dark mx-auto mb-4"></div>
-                        <p class="text-gray-500 font-light text-sm md:text-base">Conoce nuestros servicios más solicitados y sus beneficios.</p>
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-4 tracking-tight uppercase">Tratamientos <strong class="font-bold text-ana-dark">Estrella</strong></h2>
+                        <div class="w-16 h-0.5 bg-ana-dark mx-auto mb-6"></div>
+                        <p class="text-gray-500 font-light text-sm md:text-base max-w-2xl mx-auto">Conoce nuestros servicios más solicitados y por qué a nuestras clientas les encantan.</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                        <div class="service-card group flex flex-col h-full bg-gray-50 hover:bg-white shadow-sm hover:shadow-[0_10px_30px_rgba(232,62,140,0.06)] transition-all duration-500 border-t-4 border-ana-dark rounded-sm">
-                            <div class="p-6 md:p-8 flex-grow">
-                                <h3 class="text-xl md:text-2xl font-logo font-bold text-ana-dark mb-2">Aminoácidos</h3>
-                                <p class="text-xs md:text-sm font-light text-gray-600 mb-6 italic">¿Tu cabello luce opaco, sin vida y con frizz? El complemento perfecto para devolverle la vitalidad.</p>
-                                <ul class="space-y-2 text-xs md:text-sm font-light text-gray-700">
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Controla el frizz</li>
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Sella puntas y da brillo</li>
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Reconstruye fibra capilar</li>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="service-card group flex flex-col h-full bg-white hover:bg-gray-50 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border-t-4 border-ana-dark rounded-lg overflow-hidden card-lift">
+                            <div class="p-8 flex-grow">
+                                <h3 class="text-2xl font-logo font-bold text-ana-dark mb-3">Aminoácidos</h3>
+                                <p class="text-sm font-light text-gray-600 mb-6 italic leading-relaxed">"El complemento perfecto para devolverle la vitalidad a tu cabello, eliminar el frizz y aportar un brillo de espejo."</p>
+                                <ul class="space-y-3 text-sm font-medium text-gray-700">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Controla el frizz al instante</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Sella puntas abiertas</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Reconstruye la fibra capilar</li>
                                 </ul>
                             </div>
-                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
-                                <div class="pt-4 border-t border-gray-100 text-center">
-                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow text-[10px] md:text-xs font-bold text-ana-dark uppercase tracking-widest hover:text-ana-accent transition-all flex items-center justify-center gap-1 w-full opacity-100 group-hover:translate-x-1 duration-300">
-                                        Agendar este servicio <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <div class="mt-auto px-8 pb-8">
+                                <div class="pt-5 border-t border-gray-100">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-md text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="service-card group flex flex-col h-full bg-gray-50 hover:bg-white shadow-sm hover:shadow-[0_10px_30px_rgba(232,62,140,0.06)] transition-all duration-500 border-t-4 border-ana-dark rounded-sm">
-                            <div class="p-6 md:p-8 flex-grow">
-                                <h3 class="text-xl md:text-2xl font-logo font-bold text-ana-dark mb-2">Nail Bar Exclusivo</h3>
-                                <p class="text-xs md:text-sm font-light text-gray-600 mb-6 italic">Desde sistemas ligeros (Press On) hasta bases de gel para fortalecer uñas débiles (Rubber/Poly Gel).</p>
-                                <ul class="space-y-2 text-xs md:text-sm font-light text-gray-700">
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Aplicación rápida y natural</li>
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Fortalece la uña (Rubber)</li>
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Ideal para extensión (Poly Gel)</li>
+                        <div class="service-card group flex flex-col h-full bg-white hover:bg-gray-50 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border-t-4 border-ana-dark rounded-lg overflow-hidden card-lift">
+                            <div class="p-8 flex-grow">
+                                <h3 class="text-2xl font-logo font-bold text-ana-dark mb-3">Nail Bar Exclusivo</h3>
+                                <p class="text-sm font-light text-gray-600 mb-6 italic leading-relaxed">"Sistemas ligeros como Press On o bases de fortalecimiento Rubber y Poly Gel para uñas impecables."</p>
+                                <ul class="space-y-3 text-sm font-medium text-gray-700">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Aplicación rápida y natural</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Fortalecimiento con Rubber</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Ideal para extensión (Poly Gel)</li>
                                 </ul>
                             </div>
-                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
-                                <div class="pt-4 border-t border-gray-100 text-center">
-                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow text-[10px] md:text-xs font-bold text-ana-dark uppercase tracking-widest hover:text-ana-accent transition-all flex items-center justify-center gap-1 w-full opacity-100 group-hover:translate-x-1 duration-300">
-                                        Agendar este servicio <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <div class="mt-auto px-8 pb-8">
+                                <div class="pt-5 border-t border-gray-100">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-md text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="service-card group flex flex-col h-full bg-gray-50 hover:bg-white shadow-sm hover:shadow-[0_10px_30px_rgba(232,62,140,0.06)] transition-all duration-500 border-t-4 border-ana-dark rounded-sm">
-                            <div class="p-6 md:p-8 flex-grow">
-                                <h3 class="text-xl md:text-2xl font-logo font-bold text-ana-dark mb-2">Lifting Pestañas</h3>
-                                <p class="text-xs md:text-sm font-light text-gray-600 mb-6 italic">El proceso es sencillo. En menos de una hora tendrás pestañas largas, curvas y llenas de personalidad.</p>
-                                <ul class="space-y-2 text-xs md:text-sm font-light text-gray-700">
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Tratamiento 100% seguro</li>
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Mirada de impacto instantánea</li>
-                                    <li class="flex items-center"><svg class="w-3 h-3 md:w-4 md:h-4 text-ana-accent mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Olvídate de la pestañina</li>
+                        <div class="service-card group flex flex-col h-full bg-white hover:bg-gray-50 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border-t-4 border-ana-dark rounded-lg overflow-hidden card-lift">
+                            <div class="p-8 flex-grow">
+                                <h3 class="text-2xl font-logo font-bold text-ana-dark mb-3">Lifting Pestañas</h3>
+                                <p class="text-sm font-light text-gray-600 mb-6 italic leading-relaxed">"Un proceso sencillo. En menos de una hora tendrás pestañas largas, curvas y llenas de personalidad."</p>
+                                <ul class="space-y-3 text-sm font-medium text-gray-700">
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Procedimiento 100% seguro</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Mirada de impacto instantánea</li>
+                                    <li class="flex items-center"><svg class="w-4 h-4 text-ana-accent mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Olvídate de la pestañina</li>
                                 </ul>
                             </div>
-                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
-                                <div class="pt-4 border-t border-gray-100 text-center">
-                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow text-[10px] md:text-xs font-bold text-ana-dark uppercase tracking-widest hover:text-ana-accent transition-all flex items-center justify-center gap-1 w-full opacity-100 group-hover:translate-x-1 duration-300">
-                                        Agendar este servicio <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <div class="mt-auto px-8 pb-8">
+                                <div class="pt-5 border-t border-gray-100">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-md text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </div>
                             </div>
@@ -412,15 +449,16 @@
             </section>
 
             <!-- Testimonios -->
-            <section class="py-16 md:py-20 bg-[#efeae2] border-t border-gray-200 relative overflow-hidden">
+            <section class="py-20 md:py-24 bg-[#efeae2] border-t border-gray-200 relative overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="text-center mb-10 md:mb-14">
-                        <h2 class="text-2xl md:text-4xl font-light text-gray-800 mb-3 tracking-tight">LO QUE DICEN <span class="font-bold text-gray-900">NUESTRAS CLIENTAS</span></h2>
+                    <div class="text-center mb-14 md:mb-16">
+                        <h2 class="text-3xl md:text-4xl font-light text-gray-800 mb-3 tracking-tight">LO QUE DICEN <br class="md:hidden"><strong class="font-bold text-gray-900">NUESTRAS CLIENTAS</strong></h2>
+                        <div class="w-16 h-0.5 bg-gray-400 mx-auto mt-4"></div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 max-w-5xl mx-auto">
-                        <div class="flex justify-start"><div class="bg-white p-4 md:p-5 rounded-2xl rounded-tl-none shadow-sm relative w-[95%]"><div class="flex items-center gap-2 mb-2"><div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center text-ana-dark font-bold text-[10px]">LM</div><div><h4 class="text-xs font-bold text-gray-900">Laura Martínez</h4><p class="text-[9px] text-gray-500">✨ Color & Aminoácidos</p></div></div><p class="text-gray-800 text-xs leading-relaxed mb-1">¡Hola Anita! Pasaba a agradecerte. Llevo meses haciéndome el retoque de color allá y mi cabello nunca había estado tan sano. Los aminoácidos fueron la salvación. ¡Súper recomendadas! 💕</p><div class="text-right text-[10px] text-gray-400 mt-1">4:30 p. m.</div></div></div>
-                        <div class="flex justify-start"><div class="bg-white p-4 md:p-5 rounded-2xl rounded-tl-none shadow-sm relative w-[95%]"><div class="flex items-center gap-2 mb-2"><div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center text-ana-dark font-bold text-[10px]">CG</div><div><h4 class="text-xs font-bold text-gray-900">Camila Gómez</h4><p class="text-[9px] text-gray-500">💅 Nail Bar & Spa</p></div></div><p class="text-gray-800 text-xs leading-relaxed mb-1">Holaaa! El Spa de uñas es maravilloso. Me apliqué el sistema Press On y ya llevo 3 semanas y están intactas. Mil gracias por ser tan detallistas y cuidadosas con mis manitos.</p><div class="text-right text-[10px] text-gray-400 mt-1">11:15 a. m.</div></div></div>
-                        <div class="flex justify-start"><div class="bg-white p-4 md:p-5 rounded-2xl rounded-tl-none shadow-sm relative w-[95%]"><div class="flex items-center gap-2 mb-2"><div class="w-8 h-8 bg-pink-100 rounded-full flex items-center justify-center text-ana-dark font-bold text-[10px]">VR</div><div><h4 class="text-xs font-bold text-gray-900">Valeria Rojas</h4><p class="text-[9px] text-gray-500">👁️ Lifting de Pestañas</p></div></div><p class="text-gray-800 text-xs leading-relaxed mb-1">Hola! Quería contarles que amé el lifting de pestañas 😍. No me dolió nada y la mirada me cambió por completo. Qué paz se siente en el salón. ¡Nos vemos el otro mes sin falta!</p><div class="text-right text-[10px] text-gray-400 mt-1">6:42 p. m.</div></div></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 max-w-6xl mx-auto">
+                        <div class="flex justify-start card-lift"><div class="bg-white p-6 md:p-8 rounded-2xl rounded-tl-none shadow-[0_10px_30px_rgba(0,0,0,0.05)] relative w-full"><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-ana-dark font-bold text-xs shadow-inner">LM</div><div><h4 class="text-sm font-bold text-gray-900">Laura Martínez</h4><p class="text-[10px] text-gray-500 font-medium tracking-wide uppercase">✨ Color & Aminoácidos</p></div></div><p class="text-gray-700 text-sm leading-relaxed mb-2 font-light">"¡Hola Anita! Pasaba a agradecerte. Llevo meses haciéndome el retoque de color allá y mi cabello nunca había estado tan sano. Los aminoácidos fueron la salvación. ¡Súper recomendadas! 💕"</p></div></div>
+                        <div class="flex justify-start card-lift"><div class="bg-white p-6 md:p-8 rounded-2xl rounded-tl-none shadow-[0_10px_30px_rgba(0,0,0,0.05)] relative w-full border-t-4 border-ana-accent"><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-ana-dark font-bold text-xs shadow-inner">CG</div><div><h4 class="text-sm font-bold text-gray-900">Camila Gómez</h4><p class="text-[10px] text-gray-500 font-medium tracking-wide uppercase">💅 Nail Bar & Spa</p></div></div><p class="text-gray-700 text-sm leading-relaxed mb-2 font-light">"Holaaa! El Spa de uñas es maravilloso. Me apliqué el sistema Press On y ya llevo 3 semanas y están intactas. Mil gracias por ser tan detallistas y cuidadosas con mis manitos."</p></div></div>
+                        <div class="flex justify-start card-lift"><div class="bg-white p-6 md:p-8 rounded-2xl rounded-tl-none shadow-[0_10px_30px_rgba(0,0,0,0.05)] relative w-full"><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-ana-dark font-bold text-xs shadow-inner">VR</div><div><h4 class="text-sm font-bold text-gray-900">Valeria Rojas</h4><p class="text-[10px] text-gray-500 font-medium tracking-wide uppercase">👁️ Lifting de Pestañas</p></div></div><p class="text-gray-700 text-sm leading-relaxed mb-2 font-light">"Hola! Quería contarles que amé el lifting de pestañas 😍. No me dolió nada y la mirada me cambió por completo. Qué paz se siente en el salón. ¡Nos vemos el otro mes sin falta!"</p></div></div>
                     </div>
                 </div>
             </section>
@@ -430,37 +468,37 @@
              VISTA: NOSOTROS 
              ============================================== -->
         <div id="view-nosotros" class="page-view">
-            <section class="pt-20 pb-16 md:pt-32 md:pb-20 bg-pink-50 text-center px-4 border-b border-pink-100">
-                <h1 class="text-3xl md:text-5xl font-light text-ana-black mb-4 tracking-tight">SOBRE <strong class="font-bold text-ana-dark">NOSOTROS</strong></h1>
-                <div class="w-16 h-0.5 bg-ana-dark mx-auto mb-6"></div>
-                <p class="text-gray-600 font-light max-w-2xl mx-auto text-sm md:text-base leading-relaxed">Más que un salón de belleza, somos un espacio dedicado a resaltar tu esencia natural.</p>
+            <section class="pt-24 pb-16 md:pt-32 md:pb-20 bg-pink-50 text-center px-4 border-b border-pink-100">
+                <h1 class="text-4xl md:text-6xl font-light text-ana-black mb-4 tracking-tight">SOBRE <strong class="font-bold text-ana-dark">NOSOTROS</strong></h1>
+                <div class="w-16 h-1 bg-ana-dark mx-auto mb-6 rounded-full"></div>
+                <p class="text-gray-600 font-light max-w-2xl mx-auto text-base md:text-lg leading-relaxed">Más que un salón de belleza, somos un espacio dedicado a resaltar tu esencia natural.</p>
             </section>
             
-            <section class="py-16 md:py-20 bg-white">
+            <section class="py-16 md:py-24 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
                         <div class="order-2 lg:order-1">
                             <h3 class="text-xs md:text-sm font-bold tracking-[0.2em] text-ana-dark uppercase mb-3">Nuestra Marca</h3>
-                            <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-6">El arte de <br><strong class="font-bold">crear belleza</strong></h2>
-                            <p class="text-gray-600 font-light leading-relaxed mb-6 text-sm md:text-base">En Ana Molano Peluquería iniciamos con un sueño claro: ofrecer un servicio integral donde la técnica profesional del más alto nivel se encuentre con la calidez humana.</p>
-                            <div class="flex items-center gap-4 text-ana-black font-medium">
-                                <span class="text-4xl font-logo text-ana-dark">Ana Molano</span>
-                                <span class="w-12 h-px bg-gray-300"></span>
-                                <span class="text-xs uppercase tracking-widest text-gray-500">Fundadora</span>
+                            <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-6 leading-tight">El arte de <br><strong class="font-bold">crear belleza</strong></h2>
+                            <p class="text-gray-600 font-light leading-relaxed mb-8 text-sm md:text-base">En Ana Molano Peluquería iniciamos con un sueño claro: ofrecer un servicio integral donde la técnica profesional del más alto nivel se encuentre con la calidez humana. Cada visita es una experiencia diseñada exclusivamente para tu bienestar.</p>
+                            <div class="flex items-center gap-4 text-ana-black font-medium bg-gray-50 p-4 rounded-lg inline-flex">
+                                <span class="text-4xl md:text-5xl font-logo text-ana-dark">Ana Molano</span>
+                                <span class="w-8 h-px bg-gray-300"></span>
+                                <span class="text-[10px] md:text-xs uppercase tracking-widest text-gray-500 font-bold">Fundadora</span>
                             </div>
-                            <div class="mt-8">
-                                <button onclick="openGallery()" class="w-full sm:w-auto border border-ana-dark bg-ana-dark text-white hover:bg-ana-accent hover:border-ana-accent px-8 py-4 md:py-3 text-xs font-bold tracking-[0.1em] uppercase transition-all duration-300 active:scale-95 shadow-lg flex justify-center items-center gap-2">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <div class="mt-10">
+                                <button onclick="openGallery()" class="w-full sm:w-auto bg-ana-dark text-white hover:bg-ana-black px-8 py-4 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 active:scale-95 shadow-[0_8px_20px_rgba(232,62,140,0.3)] flex justify-center items-center gap-3 rounded-sm ripple-effect btn-mag">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     Ver Galería del Salón
                                 </button>
                             </div>
                         </div>
                         <div class="order-1 lg:order-2">
-                            <div class="relative w-full pb-[56.25%] bg-gray-900 rounded-sm overflow-hidden shadow-2xl group cursor-pointer" onclick="openGallery()">
-                                <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450333/0W3A2011_xtfptm.jpg" alt="Equipo de Ana Molano Peluquería" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000 ease-out">
+                            <div class="relative w-full pb-[70%] md:pb-[65%] bg-gray-900 rounded-xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] group cursor-pointer" onclick="openGallery()">
+                                <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450333/0W3A2011_xtfptm.jpg" alt="Equipo de Ana Molano Peluquería" class="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-1000 ease-out">
                                 <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="bg-ana-dark/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase flex items-center gap-2 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
+                                    <div class="bg-white/95 backdrop-blur-md text-ana-dark px-6 py-3 rounded-full text-xs font-bold tracking-widest uppercase flex items-center gap-2 shadow-2xl opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-y-0 translate-y-4 duration-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg>
                                         Tocar para ver fotos
                                     </div>
                                 </div>
@@ -470,15 +508,16 @@
                 </div>
             </section>
 
-            <section class="py-16 md:py-24 bg-gray-50">
+            <section class="py-20 md:py-24 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12 md:mb-16">
+                    <div class="text-center mb-14 md:mb-16">
                         <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-4">Nuestro <strong class="font-bold">Equipo</strong></h2>
+                        <div class="w-16 h-0.5 bg-gray-300 mx-auto"></div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6 max-w-5xl mx-auto">
-                        <div class="bg-white rounded-sm overflow-hidden shadow-md hover:-translate-y-2 transition-transform duration-300 border border-gray-100"><div class="h-80 w-full overflow-hidden bg-pink-100"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450295/0W3A1664_fptbbp.jpg" alt="Ana Molano - Master Stylist" class="w-full h-full object-cover object-top"></div><div class="p-6 text-center border-t-4 border-ana-accent bg-white"><h3 class="text-lg font-bold text-ana-black mb-1">Ana Molano</h3><p class="text-[10px] font-bold tracking-widest text-ana-dark uppercase mb-3">Master Stylist</p><p class="text-xs text-gray-500 font-light">Especialista en colorimetría avanzada y diseño de imagen. Líder y fundadora.</p></div></div>
-                        <div class="bg-white rounded-sm overflow-hidden shadow-md hover:-translate-y-2 transition-transform duration-300 border border-gray-100"><div class="h-80 w-full overflow-hidden bg-pink-100"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450294/0W3A1617_x0teaw.jpg" alt="Tatiana - Nail Artist" class="w-full h-full object-cover object-top"></div><div class="p-6 text-center border-t-4 border-ana-accent bg-white"><h3 class="text-lg font-bold text-ana-black mb-1">Tatiana</h3><p class="text-[10px] font-bold tracking-widest text-ana-dark uppercase mb-3">Nail Artist</p><p class="text-xs text-gray-500 font-light">Experta en sistemas Press On, Polygel y decoración a mano alzada.</p></div></div>
-                        <div class="bg-white rounded-sm overflow-hidden shadow-md hover:-translate-y-2 transition-transform duration-300 border border-gray-100"><div class="h-80 w-full overflow-hidden bg-pink-100"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450311/0W3A1944_iezgag.jpg" alt="Zamara - Esteticista" class="w-full h-full object-cover object-top"></div><div class="p-6 text-center border-t-4 border-ana-accent bg-white"><h3 class="text-lg font-bold text-ana-black mb-1">Zamara</h3><p class="text-[10px] font-bold tracking-widest text-ana-dark uppercase mb-3">Esteticista</p><p class="text-xs text-gray-500 font-light">Apasionada por el cuidado de la piel, lifting de pestañas y micropigmentación.</p></div></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 max-w-5xl mx-auto">
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450295/0W3A1664_fptbbp.jpg" alt="Ana Molano - Master Stylist" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Ana Molano</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Master Stylist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Especialista en colorimetría avanzada y diseño de imagen. Líder y fundadora.</p></div></div>
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450294/0W3A1617_x0teaw.jpg" alt="Tatiana - Nail Artist" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Tatiana</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Nail Artist</p><p class="text-sm text-gray-500 font-light leading-relaxed">Experta en sistemas Press On, Polygel y decoración a mano alzada.</p></div></div>
+                        <div class="bg-white rounded-xl overflow-hidden shadow-[0_5px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.1)] transition-all duration-500 border border-pink-50 card-lift"><div class="h-80 w-full overflow-hidden bg-pink-100 relative"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450311/0W3A1944_iezgag.jpg" alt="Zamara - Esteticista" class="w-full h-full object-cover object-top transition-transform duration-700 hover:scale-105"></div><div class="p-8 text-center bg-white"><h3 class="text-xl font-bold text-ana-black mb-1">Zamara</h3><p class="text-[10px] font-bold tracking-[0.2em] text-ana-dark uppercase mb-4">Esteticista</p><p class="text-sm text-gray-500 font-light leading-relaxed">Apasionada por el cuidado de la piel, lifting de pestañas y micropigmentación.</p></div></div>
                     </div>
                 </div>
             </section>
@@ -488,12 +527,27 @@
              VISTA: SERVICIOS PORTAL 
              ============================================== -->
         <div id="view-servicios-portal" class="page-view">
-            <section class="py-16 md:py-20 bg-gray-50 min-h-[80vh] flex items-center">
+            <section class="py-16 md:py-24 bg-gray-50 min-h-[80vh] flex flex-col justify-center items-center">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                    <div class="text-center mb-10 md:mb-12"><h2 class="text-3xl md:text-5xl font-light text-ana-black mb-3 md:mb-4 tracking-tight">NUESTROS <strong class="font-bold text-ana-dark">SERVICIOS</strong></h2><div class="w-12 h-0.5 bg-ana-dark mx-auto mb-4"></div></div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-                        <div onclick="navigate('mujer')" class="relative h-[300px] md:h-96 group cursor-pointer overflow-hidden rounded-sm shadow-xl active:scale-[0.98] transition-transform"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776452352/0W3A1801_ddhbvs.jpg" alt="Servicios de belleza para mujer" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"><div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center transition-colors group-hover:bg-black/50"><h3 class="text-white text-4xl md:text-5xl font-logo mb-2 group-hover:scale-110 transition-transform duration-500">Para Mujer</h3></div></div>
-                        <div onclick="navigate('hombre')" class="relative h-[300px] md:h-96 group cursor-pointer overflow-hidden rounded-sm shadow-xl active:scale-[0.98] transition-transform"><img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450440/0W3A1911_cbjvsj.jpg" alt="Servicios de barbería para hombre" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 grayscale group-hover:grayscale-0"><div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center transition-colors"><h3 class="text-white text-4xl md:text-5xl font-logo mb-2 group-hover:scale-110 transition-transform duration-500">Para Hombre</h3></div></div>
+                    <div class="text-center mb-12 md:mb-16">
+                        <h2 class="text-3xl md:text-5xl font-light text-ana-black mb-4 tracking-tight">Elige tu <strong class="font-bold text-ana-dark">Experiencia</strong></h2>
+                        <div class="w-16 h-1 bg-ana-dark mx-auto rounded-full"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 max-w-5xl mx-auto">
+                        <div onclick="navigate('mujer')" class="relative h-[350px] md:h-[450px] group cursor-pointer overflow-hidden rounded-xl shadow-2xl active:scale-[0.98] transition-transform duration-300">
+                            <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776452352/0W3A1801_ddhbvs.jpg" alt="Servicios de belleza para mujer" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col items-center justify-end pb-12 transition-colors group-hover:bg-black/50">
+                                <h3 class="text-white text-5xl md:text-6xl font-logo mb-3 group-hover:scale-110 transition-transform duration-500 drop-shadow-lg">Para Mujer</h3>
+                                <span class="bg-white/20 backdrop-blur-sm text-white px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-300">Ver Catálogo</span>
+                            </div>
+                        </div>
+                        <div onclick="navigate('hombre')" class="relative h-[350px] md:h-[450px] group cursor-pointer overflow-hidden rounded-xl shadow-2xl active:scale-[0.98] transition-transform duration-300">
+                            <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450440/0W3A1911_cbjvsj.jpg" alt="Servicios de barbería para hombre" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105 grayscale group-hover:grayscale-0">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col items-center justify-end pb-12 transition-colors group-hover:bg-black/50">
+                                <h3 class="text-white text-5xl md:text-6xl font-logo mb-3 group-hover:scale-110 transition-transform duration-500 drop-shadow-lg">Para Hombre</h3>
+                                <span class="bg-white/20 backdrop-blur-sm text-white px-5 py-2 rounded-full text-xs font-bold tracking-[0.2em] uppercase opacity-0 group-hover:opacity-100 transition-all transform translate-y-4 group-hover:translate-y-0 duration-300">Ver Catálogo</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -503,26 +557,36 @@
              VISTA: BONOS 
              ============================================== -->
         <div id="view-bonos" class="page-view">
-            <section class="py-12 md:py-24 bg-ana-light relative overflow-hidden min-h-[80vh] flex flex-col justify-center">
+            <section class="py-16 md:py-24 bg-ana-light relative overflow-hidden min-h-[85vh] flex flex-col justify-center">
+                <!-- Decoración -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob pointer-events-none"></div>
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
                         <div class="text-center md:text-left">
                             <h2 class="text-3xl md:text-5xl font-light text-ana-black mb-4 md:mb-6 leading-tight">Regala <br><strong class="font-bold text-ana-dark">Belleza y Relajación</strong></h2>
-                            <p class="text-gray-700 font-light mb-8 leading-relaxed text-sm md:text-lg">Un regalo que se disfruta. Con los bonos de regalo de Ana Molano Peluquería, regalas un rato para disfrutar, para resaltar la belleza natural en manos de profesionales con gran experiencia.</p>
+                            <p class="text-gray-700 font-light mb-8 leading-relaxed text-sm md:text-lg">Un regalo que de verdad se disfruta. Con los bonos de Ana Molano Peluquería, regalas tiempo para cuidar y resaltar la belleza natural en manos expertas.</p>
+                            <div class="hidden lg:block w-32 h-1 bg-ana-dark rounded-full"></div>
                         </div>
-                        <div class="bg-white p-6 md:p-10 shadow-2xl rounded-sm border-t-4 border-ana-dark relative">
+                        <div class="bg-white p-8 md:p-10 shadow-[0_20px_50px_rgba(232,62,140,0.1)] rounded-2xl border-t-4 border-ana-dark relative">
                             <h3 class="text-lg md:text-xl font-bold text-ana-black mb-5 md:mb-6 uppercase tracking-widest text-center md:text-left">Solicita tu Bono</h3>
                             <form class="space-y-4 md:space-y-5" onsubmit="procesarBono(event)">
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-                                    <input type="text" id="bono-nombre" placeholder="Tu nombre completo" class="w-full bg-gray-50 border border-gray-200 p-4 focus:border-ana-dark focus:ring-0 outline-none transition-colors text-xs md:text-sm font-medium" required>
-                                    <input type="email" id="bono-email" placeholder="Tu correo electrónico" class="w-full bg-gray-50 border border-gray-200 p-4 focus:border-ana-dark focus:ring-0 outline-none transition-colors text-xs md:text-sm font-medium" required>
+                                    <div class="relative">
+                                        <input type="text" id="bono-nombre" placeholder="Tu nombre completo" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:border-ana-dark focus:ring-1 focus:ring-ana-dark/20 outline-none transition-all text-xs md:text-sm font-medium" required>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="email" id="bono-email" placeholder="Tu correo electrónico" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:border-ana-dark focus:ring-1 focus:ring-ana-dark/20 outline-none transition-all text-xs md:text-sm font-medium" required>
+                                    </div>
                                 </div>
-                                <textarea id="bono-mensaje" rows="4" placeholder="¿Qué servicio deseas regalar?" class="w-full bg-gray-50 border border-gray-200 p-4 focus:border-ana-dark focus:ring-0 outline-none transition-colors text-xs md:text-sm font-medium resize-none" required></textarea>
-                                <button type="submit" class="w-full border-2 border-ana-dark bg-ana-dark text-white hover:bg-white hover:text-ana-dark px-6 py-4 text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-300 flex justify-center items-center gap-2 shadow-md active:scale-95">Enviar solicitud por WhatsApp</button>
-                                <p class="text-[10px] text-gray-500 mt-4 text-center md:text-left flex items-center justify-center md:justify-start gap-1.5">
-                                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                                    <strong class="font-medium text-gray-600">Medios de pago:</strong> Nequi, Daviplata o Transferencia.
-                                </p>
+                                <textarea id="bono-mensaje" rows="4" placeholder="¿Qué servicio deseas regalar o de qué valor es el bono?" class="w-full bg-gray-50 border border-gray-200 rounded-lg p-4 focus:border-ana-dark focus:ring-1 focus:ring-ana-dark/20 outline-none transition-all text-xs md:text-sm font-medium resize-none" required></textarea>
+                                <button type="submit" class="w-full bg-ana-dark text-white hover:bg-ana-black px-6 py-4 rounded-lg text-xs md:text-sm font-bold uppercase tracking-widest transition-all duration-300 flex justify-center items-center gap-2 shadow-[0_8px_20px_rgba(232,62,140,0.3)] active:scale-95 ripple-effect btn-mag">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                                    Solicitar por WhatsApp
+                                </button>
+                                <div class="bg-gray-50 rounded-lg p-3 mt-4 text-center border border-gray-100 flex flex-col md:flex-row items-center justify-center gap-2">
+                                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                    <span class="text-[10px] sm:text-xs text-gray-500"><strong class="font-medium text-gray-700">Medios de pago:</strong> Nequi, Daviplata o Transferencia.</span>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -534,88 +598,94 @@
              VISTA: MUJER 
              ============================================== -->
         <div id="view-mujer" class="page-view">
-            <div class="py-16 md:py-20 bg-white">
+            <div class="py-16 md:py-24 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12 md:mb-16"><h2 class="text-3xl md:text-5xl font-light text-ana-black mb-3 md:mb-4 tracking-tight">SERVICIOS MUJER</h2><div class="w-12 h-0.5 bg-ana-dark mx-auto"></div></div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-                        <div class="service-card group flex flex-col h-full bg-gray-50 hover:bg-white shadow-sm hover:shadow-[0_10px_30px_rgba(232,62,140,0.06)] transition-all duration-500 border-t-4 border-ana-dark rounded-sm">
-                            <div class="relative h-64 md:h-80 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                    <div class="text-center mb-14 md:mb-16">
+                        <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-3 tracking-tight uppercase">Catálogo <strong class="font-bold text-ana-dark">Mujer</strong></h2>
+                        <div class="w-16 h-1 bg-ana-dark mx-auto rounded-full"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
                                 <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450391/0W3A1829_yw8a2m.jpg" alt="Cuidado Capilar Femenino" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105">
-                                <div class="service-img-overlay absolute inset-0 bg-black/30 md:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100">
-                                    <span class="bg-white/90 text-ana-black px-4 py-3 md:py-2 text-[10px] md:text-xs font-bold uppercase tracking-widest">Agendar Cita</span>
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-ana-dark px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
                                 </div>
                             </div>
-                            <div class="p-5 md:p-6 flex-grow">
-                                <h3 class="text-lg md:text-xl font-bold text-ana-black mb-4 tracking-wide uppercase">Cuidado Capilar</h3>
-                                <ul class="space-y-0 w-full">
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Corte de Cabello</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Lavado / Shampoo</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $5.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Cepillado</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $20.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Tinturas / Color</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa valoración</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Mechas / Balayage</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa valoración</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Repolarización</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $30.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Aminoácidos</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $100.000</span></li>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-ana-dark rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg></div>
+                                <h3 class="text-xl font-bold text-ana-black mb-5 tracking-wide uppercase">Cuidado Capilar</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Corte de Cabello</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Lavado / Shampoo</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $5.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Cepillado</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Tinturas / Color</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa val.</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Mechas / Balayage</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa val.</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Repolarización</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $30.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Aminoácidos</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $100.000</span></li>
                                 </ul>
                             </div>
-                            <div class="mt-auto px-5 pb-5 md:px-6 md:pb-6">
-                                <div class="pt-4 border-t border-gray-100 text-center">
-                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow text-[10px] md:text-xs font-bold text-ana-dark uppercase tracking-widest hover:text-ana-accent transition-all flex items-center justify-center gap-1 w-full opacity-100 group-hover:translate-x-1 duration-300">
-                                        Agendar este servicio <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="service-card group flex flex-col h-full bg-gray-50 hover:bg-white shadow-sm hover:shadow-[0_10px_30px_rgba(232,62,140,0.06)] transition-all duration-500 border-t-4 border-ana-dark rounded-sm">
-                            <div class="relative h-64 md:h-80 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
                                 <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450407/0W3A1736_cstnou.jpg" alt="Spa de uñas para mujeres" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105">
-                                <div class="service-img-overlay absolute inset-0 bg-black/30 md:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100">
-                                    <span class="bg-white/90 text-ana-black px-4 py-3 md:py-2 text-[10px] md:text-xs font-bold uppercase tracking-widest">Agendar Cita</span>
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-ana-dark px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
                                 </div>
                             </div>
-                            <div class="p-5 md:p-6 flex-grow">
-                                <h3 class="text-lg md:text-xl font-bold text-ana-black mb-4 tracking-wide uppercase">Nail Bar & Spa</h3>
-                                <ul class="space-y-0 w-full">
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Manicure Tradicional</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Pedicure Tradicional</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$25.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Semipermanente</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$45.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Pedicure Semi</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$50.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Base Rubber</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$65.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Baño Poly gel</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$75.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Press On</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$90.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Montura Poly gel</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$130.000</span></li>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-ana-dark rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white">💅</div>
+                                <h3 class="text-xl font-bold text-ana-black mb-5 tracking-wide uppercase">Nail Bar & Spa</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Manicure Tradicional</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Pedicure Tradicional</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$25.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Semipermanente</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$45.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Pedicure Semi</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$50.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Base Rubber</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$65.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Baño Poly gel</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$75.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Press On</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$90.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Montura Poly gel</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$130.000</span></li>
                                 </ul>
                             </div>
-                            <div class="mt-auto px-5 pb-5 md:px-6 md:pb-6">
-                                <div class="pt-4 border-t border-gray-100 text-center">
-                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow text-[10px] md:text-xs font-bold text-ana-dark uppercase tracking-widest hover:text-ana-accent transition-all flex items-center justify-center gap-1 w-full opacity-100 group-hover:translate-x-1 duration-300">
-                                        Agendar este servicio <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="service-card group flex flex-col h-full bg-gray-50 hover:bg-white shadow-sm hover:shadow-[0_10px_30px_rgba(232,62,140,0.06)] transition-all duration-500 border-t-4 border-ana-dark rounded-sm">
-                            <div class="relative h-64 md:h-80 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
                                 <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776452352/0W3A1801_ddhbvs.jpg" alt="Tratamientos faciales y estéticos" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105">
-                                <div class="service-img-overlay absolute inset-0 bg-black/30 md:bg-black/10 transition-colors duration-300 flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100">
-                                    <span class="bg-white/90 text-ana-black px-4 py-3 md:py-2 text-[10px] md:text-xs font-bold uppercase tracking-widest">Agendar Cita</span>
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-ana-dark px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
                                 </div>
                             </div>
-                            <div class="p-5 md:p-6 flex-grow">
-                                <h3 class="text-lg md:text-xl font-bold text-ana-black mb-4 tracking-wide uppercase">Estética & Mirada</h3>
-                                <ul class="space-y-0 w-full">
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Masajes Reductores</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Limpieza Facial</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $60.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Micropigmentación</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa valoración</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Lifting de Pestañas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Diseño de Cejas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $15.000</span></li>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-ana-dark rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
+                                <h3 class="text-xl font-bold text-ana-black mb-5 tracking-wide uppercase">Estética & Mirada</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Masajes Reductores</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Limpieza Facial</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $60.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Micropigmentación</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa val.</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Lifting de Pestañas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Diseño de Cejas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $15.000</span></li>
                                 </ul>
                             </div>
-                            <div class="mt-auto px-5 pb-5 md:px-6 md:pb-6">
-                                <div class="pt-4 border-t border-gray-100 text-center">
-                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow text-[10px] md:text-xs font-bold text-ana-dark uppercase tracking-widest hover:text-ana-accent transition-all flex items-center justify-center gap-1 w-full opacity-100 group-hover:translate-x-1 duration-300">
-                                        Agendar este servicio <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </div>
                             </div>
@@ -629,55 +699,60 @@
              VISTA: HOMBRE 
              ============================================== -->
         <div id="view-hombre" class="page-view">
-            <div class="py-16 md:py-20 bg-gray-50">
+            <div class="py-16 md:py-24 bg-gray-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="text-center mb-12 md:mb-16"><h2 class="text-3xl md:text-5xl font-light text-ana-black mb-3 md:mb-4 tracking-tight">SERVICIOS HOMBRE</h2><div class="w-12 h-0.5 bg-ana-dark mx-auto"></div></div>
+                    <div class="text-center mb-14 md:mb-16">
+                        <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-3 tracking-tight uppercase">Catálogo <strong class="font-bold text-gray-900">Hombre</strong></h2>
+                        <div class="w-16 h-1 bg-gray-800 mx-auto rounded-full"></div>
+                    </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
-                        <div class="service-card group flex flex-col h-full bg-white shadow-sm hover:shadow-[0_10px_30px_rgba(232,62,140,0.06)] transition-all duration-500 border-t-4 border-gray-800 rounded-sm">
-                            <div class="relative h-64 md:h-80 w-full mb-0 overflow-hidden bg-gray-200 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-200 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
                                 <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450441/0W3A1922_bj4r5o.jpg" alt="Corte de cabello y barbería" class="w-full h-full object-cover grayscale transition-transform duration-1000 ease-out group-hover:scale-105 group-hover:grayscale-0">
-                                <div class="service-img-overlay absolute inset-0 bg-black/30 md:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100">
-                                    <span class="bg-white/90 text-ana-black px-4 py-3 text-[10px] font-bold uppercase tracking-widest">Agendar Cita</span>
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-gray-900 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
                                 </div>
                             </div>
-                            <div class="p-5 md:p-6 flex-grow">
-                                <h3 class="text-lg md:text-xl font-bold text-ana-black mb-4 tracking-wide uppercase">Corte & Estilo</h3>
-                                <ul class="space-y-0 w-full">
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Corte Clásico y Moderno</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Lavado / Shampoo</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $5.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Colorimetría Masculina</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $40.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Camuflaje de Canas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $30.000</span></li>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-gray-800 rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg></div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-5 tracking-wide uppercase">Corte & Estilo</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Corte Clásico / Moderno</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Lavado / Shampoo</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $5.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Colorimetría</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $40.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Camuflaje de Canas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $30.000</span></li>
                                 </ul>
                             </div>
-                            <div class="mt-auto px-5 pb-5 md:px-6 md:pb-6">
-                                <div class="pt-4 border-t border-gray-100 text-center">
-                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow text-[10px] md:text-xs font-bold text-gray-800 uppercase tracking-widest hover:text-ana-dark transition-all flex items-center justify-center gap-1 w-full opacity-100 group-hover:translate-x-1 duration-300">
-                                        Agendar este servicio <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-gray-100 text-gray-800 hover:bg-gray-900 hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="service-card group flex flex-col h-full bg-white shadow-sm hover:shadow-[0_10px_30px_rgba(232,62,140,0.06)] transition-all duration-500 border-t-4 border-gray-800 rounded-sm">
-                            <div class="relative h-64 md:h-80 w-full mb-0 overflow-hidden bg-gray-200 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-200 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
                                 <img src="https://images.unsplash.com/photo-1512618831669-521d4b375f5d?q=80&w=1974&auto=format&fit=crop" alt="Cuidado personal y estético masculino" class="w-full h-full object-cover grayscale transition-transform duration-1000 ease-out group-hover:scale-105 group-hover:grayscale-0">
-                                <div class="service-img-overlay absolute inset-0 bg-black/30 md:bg-black/20 transition-colors duration-300 flex items-center justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100">
-                                    <span class="bg-white/90 text-ana-black px-4 py-3 text-[10px] font-bold uppercase tracking-widest">Agendar Cita</span>
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-gray-900 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
                                 </div>
                             </div>
-                            <div class="p-5 md:p-6 flex-grow">
-                                <h3 class="text-lg md:text-xl font-bold text-ana-black mb-4 tracking-wide uppercase">Cuidado Personal</h3>
-                                <ul class="space-y-0 w-full">
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Limpieza Facial Profunda</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $60.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Manicure Masculino</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 border-b border-gray-50 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Pedicure y SPA</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$25.000</span></li>
-                                    <li class="flex justify-between items-center py-2.5 px-1 price-row-anim"><span class="flex items-center text-gray-800 font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Masajes Relajantes</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-gray-800 rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-5 tracking-wide uppercase">Cuidado Personal</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Limpieza Facial Profunda</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $60.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Manicure Masculino</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Pedicure y SPA</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$25.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Masajes Relajantes</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
                                 </ul>
                             </div>
-                            <div class="mt-auto px-5 pb-5 md:px-6 md:pb-6">
-                                <div class="pt-4 border-t border-gray-100 text-center">
-                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow text-[10px] md:text-xs font-bold text-gray-800 uppercase tracking-widest hover:text-ana-dark transition-all flex items-center justify-center gap-1 w-full opacity-100 group-hover:translate-x-1 duration-300">
-                                        Agendar este servicio <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-gray-100 text-gray-800 hover:bg-gray-900 hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                                     </button>
                                 </div>
                             </div>
@@ -691,46 +766,47 @@
              VISTA: UBICACION 
              ============================================== -->
         <div id="view-ubicacion" class="page-view">
-            <section class="py-16 md:py-20 bg-white">
+            <section class="py-16 md:py-24 bg-white">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
-                        <div class="flex flex-col justify-between bg-gray-50 p-6 md:p-10 border-t-4 border-ana-dark shadow-sm">
-                            <div>
-                                <h2 class="text-2xl md:text-3xl font-light text-ana-black mb-8 md:mb-10 tracking-wide uppercase">Visítanos</h2>
-                                <div class="mb-8">
-                                    <h3 class="text-xs md:text-sm font-bold tracking-[0.1em] text-ana-dark uppercase mb-2">Sede Principal</h3>
-                                    <p class="text-gray-600 font-light leading-relaxed text-sm md:text-base">
+                    <div class="text-center mb-12 md:mb-14">
+                        <h2 class="text-3xl md:text-5xl font-light text-ana-black mb-4 tracking-tight uppercase">Nuestra <strong class="font-bold text-ana-dark">Ubicación</strong></h2>
+                        <div class="w-16 h-1 bg-ana-dark mx-auto rounded-full mb-4"></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start">
+                        <div class="flex flex-col justify-between bg-gray-50 p-8 md:p-12 border-t-4 border-ana-dark shadow-[0_15px_40px_rgba(0,0,0,0.06)] rounded-xl relative overflow-hidden">
+                            <div class="absolute -right-10 -top-10 text-pink-100 opacity-50 w-40 h-40">
+                                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            </div>
+                            <div class="relative z-10">
+                                <div class="mb-10">
+                                    <h3 class="text-sm font-bold tracking-[0.2em] text-ana-dark uppercase mb-4 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> Sede Principal</h3>
+                                    <p class="text-gray-700 font-light leading-relaxed text-base md:text-lg">
                                         <strong class="font-bold text-gray-900">Puente Aranda</strong><br/>
                                         Cra. 43c #5-84, Nueva Primavera<br/>
                                         Bogotá, Cundinamarca<br/>
-                                        <span class="text-xs text-gray-500 mt-1 inline-block">(A mano izquierda de la Distribuidora Olmos)</span>
+                                        <span class="text-sm text-gray-500 mt-2 inline-block bg-white px-3 py-1 rounded-md border border-gray-100 shadow-sm">📍 A mano izquierda de la Distribuidora Olmos</span>
                                     </p>
                                 </div>
-                                <div class="mb-6">
-                                    <h3 class="text-xs md:text-sm font-bold tracking-[0.1em] text-ana-dark uppercase mb-3">Horarios</h3>
-                                    <ul class="text-gray-600 font-light space-y-3 text-sm md:text-base">
-                                        <li class="flex justify-between border-b border-gray-200 pb-2"><span>Lunes a Sábado:</span> <span class="font-medium text-gray-900">9:00 AM - 7:00 PM</span></li>
-                                        <li class="flex justify-between border-b border-gray-200 pb-2"><span>Domingos:</span> <span class="font-medium text-gray-900">10:00 AM - 6:00 PM</span></li>
-                                        <li class="text-ana-dark pt-2 text-xs md:text-sm font-bold tracking-wider uppercase">Martes cerrado (Día de descanso)</li>
+                                <div class="mb-8">
+                                    <h3 class="text-sm font-bold tracking-[0.2em] text-ana-dark uppercase mb-4 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Horarios</h3>
+                                    <ul class="text-gray-700 font-light space-y-4 text-sm md:text-base">
+                                        <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Lunes a Sábado</span> <span class="font-bold text-gray-900 bg-white px-3 py-1 rounded-full shadow-sm">9:00 AM - 7:00 PM</span></li>
+                                        <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Domingos</span> <span class="font-bold text-gray-900 bg-white px-3 py-1 rounded-full shadow-sm">10:00 AM - 6:00 PM</span></li>
+                                        <li class="text-ana-dark pt-2 text-sm font-bold tracking-wider uppercase flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg> Martes cerrado (Día de descanso)</li>
                                     </ul>
-                                </div>
-                                <div class="mt-6">
-                                    <h3 class="text-xs md:text-sm font-bold tracking-[0.1em] text-ana-dark uppercase mb-3">Cómo Llegar</h3>
-                                    <div class="w-full h-48 md:h-64 rounded-sm overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow">
-                                        <iframe src="https://maps.google.com/maps?q=Ana+Molano+Peluqueria+Bogota&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de Ana Molano Peluquería"></iframe>
-                                    </div>
-                                    <a href="https://maps.google.com/?q=Ana+Molano+Peluqueria+Bogota" target="_blank" class="inline-flex items-center gap-2 mt-3 text-xs font-bold text-ana-dark hover:text-ana-black uppercase tracking-widest transition-colors">
-                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                                        Abrir en Google Maps
-                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-col justify-center items-center bg-ana-light p-8 md:p-10 border border-pink-100 text-center shadow-sm">
-                            <svg class="w-12 h-12 md:w-16 md:h-16 text-ana-dark mb-4 md:mb-6 animate-float" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                            <h2 class="text-xl md:text-2xl font-bold text-ana-black mb-3 md:mb-4 tracking-wide uppercase">Atención Rápida</h2>
-                            <p class="text-gray-600 font-light mb-6 md:mb-8 text-sm md:text-base">La forma más rápida de hacernos una consulta directa es escribiéndonos a nuestro WhatsApp.</p>
-                            <a href="https://wa.me/573133292214?text=¡Hola!%20✨%20Me%20encantaría%20hacerles%20una%20consulta.%20💅" target="_blank" class="w-full bg-[#25D366] hover:bg-green-600 text-white px-6 py-4 text-xs md:text-sm font-bold tracking-[0.1em] uppercase transition-colors shadow-lg flex justify-center items-center active:scale-95">Escribir al WhatsApp</a>
+                        <div class="flex flex-col gap-6">
+                            <div class="w-full h-64 md:h-[400px] rounded-xl overflow-hidden border border-gray-200 shadow-[0_15px_40px_rgba(0,0,0,0.08)] group relative p-1 bg-white">
+                                <div class="w-full h-full rounded-lg overflow-hidden relative">
+                                    <iframe src="https://maps.google.com/maps?q=Ana+Molano+Peluqueria+Bogota&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de Ana Molano Peluquería" class="grayscale group-hover:grayscale-0 transition-all duration-700"></iframe>
+                                </div>
+                            </div>
+                            <a href="https://maps.google.com/?q=Ana+Molano+Peluqueria+Bogota" target="_blank" class="w-full bg-ana-dark text-white hover:bg-ana-black px-6 py-4 rounded-xl text-xs md:text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-[0_8px_20px_rgba(232,62,140,0.3)] flex justify-center items-center gap-2 active:scale-95 ripple-effect btn-mag">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                                Iniciar Navegación en Google Maps
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -741,35 +817,35 @@
              VISTA: AGENDAMIENTO 
              ============================================== -->
         <div id="view-agendamiento" class="page-view">
-            <div class="py-12 md:py-20 bg-pink-50 min-h-[80vh] relative overflow-hidden">
+            <div class="py-12 md:py-20 bg-pink-50 min-h-[85vh] relative overflow-hidden flex items-center">
                 <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-pink-100 to-transparent opacity-60 pointer-events-none"></div>
                 <div class="absolute -top-24 -right-24 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob pointer-events-none"></div>
                 <div class="absolute top-48 -left-24 w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000 pointer-events-none"></div>
                 
-                <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="bg-white shadow-2xl p-6 md:p-10 border-t-4 border-ana-dark rounded-xl">
+                <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                    <div class="bg-white shadow-[0_20px_50px_rgba(232,62,140,0.1)] p-6 md:p-12 border-t-4 border-ana-dark rounded-2xl">
                         <div class="text-center mb-8 md:mb-12">
-                            <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-3 tracking-tight uppercase">Reserva tu <strong class="font-bold text-ana-dark">Espacio</strong></h2>
-                            <p class="text-gray-500 font-light text-sm md:text-base px-2 max-w-2xl mx-auto">Sigue estos dos sencillos pasos para agendar tu cita. Recibirás un correo de confirmación automáticamente.</p>
+                            <h2 class="text-3xl md:text-5xl font-light text-ana-black mb-4 tracking-tight uppercase">Reserva tu <strong class="font-bold text-ana-dark">Espacio</strong></h2>
+                            <p class="text-gray-500 font-light text-sm md:text-base px-2 max-w-xl mx-auto">Sigue estos dos sencillos pasos para agendar tu cita con nosotros. Recibirás confirmación automática.</p>
                         </div>
                         <div class="mb-10 md:mb-12">
-                            <h3 class="text-xs md:text-sm font-bold tracking-widest text-ana-dark uppercase mb-4 md:mb-5 border-b border-pink-100 pb-3 flex items-center gap-2">
-                                <span class="bg-ana-light text-ana-dark w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span>
+                            <h3 class="text-xs md:text-sm font-bold tracking-[0.15em] text-ana-dark uppercase mb-5 md:mb-6 border-b border-pink-100 pb-3 flex items-center gap-3">
+                                <span class="bg-ana-dark text-white w-6 h-6 rounded-full flex items-center justify-center text-xs shadow-md">1</span>
                                 Selecciona el Servicio Principal
                             </h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Capilar" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-100 p-5 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-medium text-sm bg-white rounded-lg shadow-sm text-gray-700">Cuidado Capilar (Color, Keratina)</div></label>
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Nails" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-100 p-5 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-medium text-sm bg-white rounded-lg shadow-sm text-gray-700">Nail Spa (Manos y Pies)</div></label>
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Estetica" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-100 p-5 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-medium text-sm bg-white rounded-lg shadow-sm text-gray-700">Estética (Masajes, Faciales)</div></label>
-                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Hombre" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-100 p-5 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-medium text-sm bg-white rounded-lg shadow-sm text-gray-700">Corte & Estilo / Hombre</div></label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Capilar" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💇‍♀️</span> Cuidado Capilar</div></label>
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Nails" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">💅</span> Nail Spa Exclusivo</div></label>
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Estetica" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">🧖‍♀️</span> Estética & Mirada</div></label>
+                                <label class="time-pill cursor-pointer active:scale-[0.98] transition-transform"><input type="radio" name="servicio_cal" value="Hombre" class="hidden" onchange="mostrarCalendly()"><div class="border-2 border-pink-50 p-5 md:p-6 text-center hover:border-ana-dark hover:bg-pink-50 transition-all font-bold text-sm bg-white rounded-xl shadow-sm text-gray-700 flex flex-col items-center gap-2"><span class="text-2xl">✂️</span> Corte Hombre</div></label>
                             </div>
                         </div>
-                        <div id="calendly-section" class="opacity-30 pointer-events-none transition-all duration-700">
-                            <h3 class="text-xs md:text-sm font-bold tracking-widest text-ana-dark uppercase mb-4 md:mb-5 border-b border-pink-100 pb-3 flex items-center gap-2">
-                                <span class="bg-ana-light text-ana-dark w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span>
+                        <div id="calendly-section" class="opacity-30 pointer-events-none transition-all duration-700 h-0 overflow-hidden">
+                            <h3 class="text-xs md:text-sm font-bold tracking-[0.15em] text-ana-dark uppercase mb-5 md:mb-6 border-b border-pink-100 pb-3 flex items-center gap-3">
+                                <span class="bg-ana-dark text-white w-6 h-6 rounded-full flex items-center justify-center text-xs shadow-md">2</span>
                                 Elige tu fecha y hora
                             </h3>
-                            <div class="calendly-inline-widget bg-white rounded-lg overflow-hidden" data-url="https://calendly.com/anamolanopeluqueria/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1f1f1f&primary_color=e83e8c" style="min-width:320px;height:700px;"></div>
+                            <div class="calendly-inline-widget bg-white rounded-xl overflow-hidden border border-gray-100 shadow-inner" data-url="https://calendly.com/anamolanopeluqueria/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=1f1f1f&primary_color=e83e8c" style="min-width:320px;height:700px;"></div>
                             <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
                         </div>
                     </div>
@@ -781,81 +857,83 @@
     <!-- ==============================================
          FOOTER 
          ============================================== -->
-    <footer class="bg-[#111111] text-white pt-16 md:pt-20 pb-8 md:pb-10 mt-auto">
+    <footer class="bg-[#111111] text-white pt-16 md:pt-20 pb-8 md:pb-10 mt-auto relative z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-10 mb-12 md:mb-16 text-center md:text-left">
-                <div class="col-span-1 md:col-span-1">
-                    <div class="inline-block animate-float">
-                        <h3 class="text-4xl font-logo mb-3 md:mb-4">Ana Molano</h3>
+                <div class="col-span-1 md:col-span-1 flex flex-col items-center md:items-start">
+                    <div class="inline-block animate-float cursor-pointer" onclick="navigate('home')">
+                        <h3 class="text-5xl font-logo mb-3 md:mb-4 text-white drop-shadow-md">Ana Molano</h3>
                     </div>
-                    <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 px-4 md:px-0">Un espacio que combina la ciencia y el arte de la belleza. Peluquería, spa de uñas y distribuidora oficial.</p>
+                    <p class="text-gray-400 text-xs font-light leading-relaxed mb-6 px-4 md:px-0">Un espacio que combina la ciencia y el arte de la belleza. Peluquería, spa de uñas y distribuidora oficial en Bogotá.</p>
                     <div class="flex justify-center md:justify-start space-x-5 md:space-x-4">
-                        <a href="https://www.instagram.com/anamolanopeluqueria" target="_blank" aria-label="Instagram de Ana Molano" class="text-gray-400 hover:text-white transition-colors"><svg class="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
-                        <a href="https://www.facebook.com/anamolanopeluqueria" target="_blank" aria-label="Facebook de Ana Molano" class="text-gray-400 hover:text-white transition-colors"><svg class="w-6 h-6 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                        <a href="https://www.instagram.com/anamolanopeluqueria" target="_blank" aria-label="Instagram de Ana Molano" class="text-white hover:text-ana-accent transition-transform hover:scale-110"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                        <a href="https://www.facebook.com/anamolanopeluqueria" target="_blank" aria-label="Facebook de Ana Molano" class="text-white hover:text-ana-accent transition-transform hover:scale-110"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
                     </div>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-widest mb-5 md:mb-6">Servicios Rápidos</h4>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-5 md:mb-6 text-ana-light">Servicios Rápidos</h4>
                     <ul class="space-y-4 md:space-y-3 text-sm font-light text-gray-400">
-                        <li><button onclick="navigate('mujer')" class="hover:text-white transition-colors py-1">Servicios Mujer</button></li>
-                        <li><button onclick="navigate('hombre')" class="hover:text-white transition-colors py-1">Servicios Hombre</button></li>
-                        <li><button onclick="navigate('bonos')" class="hover:text-ana-accent transition-colors font-medium py-1">Comprar Bono de Regalo</button></li>
-                        <li><button onclick="navigate('agendamiento')" class="hover:text-white transition-colors py-1">Agendar Cita</button></li>
+                        <li><button onclick="navigate('mujer')" class="hover:text-white transition-colors py-1 nav-line">Servicios Mujer</button></li>
+                        <li><button onclick="navigate('hombre')" class="hover:text-white transition-colors py-1 nav-line">Servicios Hombre</button></li>
+                        <li><button onclick="navigate('bonos')" class="text-ana-accent hover:text-white transition-colors font-medium py-1 nav-line">Comprar Bono Regalo</button></li>
+                        <li><button onclick="navigate('agendamiento')" class="hover:text-white transition-colors py-1 nav-line">Agendar Cita</button></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-widest mb-5 md:mb-6">Información</h4>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-5 md:mb-6 text-ana-light">Información</h4>
                     <ul class="space-y-4 md:space-y-3 text-sm font-light text-gray-400">
-                        <li><button onclick="navigate('nosotros')" class="hover:text-white transition-colors py-1">Nuestra Filosofía y Equipo</button></li>
-                        <li><button onclick="navigate('ubicacion')" class="hover:text-white transition-colors py-1">Ubicación y Horarios</button></li>
-                        <li class="pt-4 text-white font-medium"><a href="mailto:hola@anamolanopeluqueria.com" class="hover:text-ana-accent transition-colors">hola@anamolanopeluqueria.com</a></li>
-                        <li class="text-white font-medium">+57 313 329 2214</li>
+                        <li><button onclick="navigate('nosotros')" class="hover:text-white transition-colors py-1 nav-line">Nuestra Filosofía</button></li>
+                        <li><button onclick="navigate('ubicacion')" class="hover:text-white transition-colors py-1 nav-line">Ubicación y Horarios</button></li>
+                        <li class="pt-4 text-white font-medium flex items-center justify-center md:justify-start gap-2"><svg class="w-4 h-4 text-ana-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg><a href="mailto:hola@anamolanopeluqueria.com" class="hover:text-ana-accent transition-colors">hola@anamolanopeluqueria.com</a></li>
+                        <li class="text-white font-medium flex items-center justify-center md:justify-start gap-2"><svg class="w-4 h-4 text-ana-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg><a href="tel:+573133292214" class="hover:text-ana-accent transition-colors">+57 313 329 2214</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="text-sm font-bold uppercase tracking-widest mb-5 md:mb-6">Newsletter</h4>
-                    <p class="text-sm font-light text-gray-400 mb-4 px-4 md:px-0">Entérate de las últimas promociones.</p>
+                    <h4 class="text-sm font-bold uppercase tracking-widest mb-5 md:mb-6 text-ana-light">Newsletter</h4>
+                    <p class="text-sm font-light text-gray-400 mb-4 px-4 md:px-0">Recibe nuestras últimas promociones y tips de belleza directo en tu WhatsApp.</p>
                     <form class="flex flex-col gap-3" onsubmit="procesarNewsletter(event)">
-                        <input type="email" id="nl-email" placeholder="Correo electrónico" class="bg-white text-black px-4 py-3 text-sm w-full focus:outline-none text-center md:text-left rounded-sm" required>
-                        <button type="submit" class="text-center md:text-left font-bold text-sm tracking-widest uppercase hover:text-ana-dark transition-colors py-3 md:py-0 active:scale-95">Recibir por WhatsApp</button>
+                        <input type="email" id="nl-email" placeholder="Tu correo electrónico" class="bg-white/10 border border-white/20 text-white placeholder-gray-500 px-4 py-3 rounded-lg text-sm w-full focus:outline-none focus:border-ana-accent text-center md:text-left transition-colors" required>
+                        <button type="submit" class="text-center bg-ana-dark text-white font-bold text-xs tracking-[0.1em] uppercase hover:bg-white hover:text-ana-dark rounded-lg transition-colors py-3.5 shadow-lg active:scale-95 ripple-effect">Unirme a la lista</button>
                     </form>
                 </div>
             </div>
             <div class="border-t border-gray-800 pt-6 md:pt-8 text-[10px] md:text-xs font-light text-gray-500 flex flex-col md:flex-row justify-center md:justify-between items-center text-center">
                 <p>&copy; 2026 ANA MOLANO PELUQUERÍA. Todos los derechos reservados.</p>
+                <p class="mt-2 md:mt-0">Diseñado con ❤️ para Bogotá.</p>
             </div>
         </div>
     </footer>
 
     <!-- FAB WHATSAPP -->
-    <a href="https://wa.me/573133292214?text=¡Hola!%20✨%20Me%20encantaría%20hacerles%20una%20consulta.%20💅" target="_blank" aria-label="Escríbenos por WhatsApp" class="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 bg-[#25D366] hover:bg-green-600 text-white w-12 h-12 md:w-14 md:h-14 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center transition-transform hover:-translate-y-1 active:scale-90 wa-pulse">
-        <svg class="w-6 h-6 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <a href="https://wa.me/573133292214?text=¡Hola!%20✨%20Me%20encantaría%20hacerles%20una%20consulta.%20💅" target="_blank" aria-label="Escríbenos por WhatsApp" class="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-50 bg-[#25D366] hover:bg-green-600 text-white w-14 h-14 md:w-16 md:h-16 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center transition-transform hover:-translate-y-1 active:scale-90 wa-pulse">
+        <svg class="w-7 h-7 md:w-8 md:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </a>
 
     <!-- LIGHTBOX DE GALERÍA -->
     <div id="gallery-lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden flex-col justify-center items-center opacity-0 transition-opacity duration-300">
-        <button onclick="closeGallery()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white p-2 transition-colors z-50 bg-black/30 rounded-full">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <button onclick="closeGallery()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white/70 hover:text-white p-3 transition-colors z-50 bg-black/30 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg">
+            <svg class="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
-        <div class="relative w-full max-w-6xl px-4 flex items-center justify-between h-[80vh]">
-            <button onclick="changeGalleryImage(-1)" class="text-white/70 hover:text-white p-2 transition-colors z-50 bg-black/30 hover:bg-ana-dark rounded-full active:scale-90">
+        <div class="relative w-full max-w-6xl px-2 md:px-4 flex items-center justify-between h-[85vh]">
+            <button onclick="changeGalleryImage(-1)" class="hidden md:flex text-white/70 hover:text-white p-3 transition-colors z-50 bg-black/30 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg">
                 <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
             </button>
-            <div class="flex-1 flex justify-center items-center h-full px-2 md:px-8">
-                <img id="lightbox-img" src="" alt="Instalaciones" class="max-h-full max-w-full object-contain rounded-sm shadow-2xl transition-opacity duration-300">
+            <div class="flex-1 flex justify-center items-center h-full px-0 md:px-8">
+                <img id="lightbox-img" src="" alt="Instalaciones" class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-opacity duration-300 pointer-events-none">
             </div>
-            <button onclick="changeGalleryImage(1)" class="text-white/70 hover:text-white p-2 transition-colors z-50 bg-black/30 hover:bg-ana-dark rounded-full active:scale-90">
+            <button onclick="changeGalleryImage(1)" class="hidden md:flex text-white/70 hover:text-white p-3 transition-colors z-50 bg-black/30 hover:bg-ana-dark rounded-full active:scale-90 shadow-lg">
                 <svg class="w-8 h-8 md:w-10 md:h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
             </button>
         </div>
-        <div class="absolute bottom-6 md:bottom-10 left-0 w-full text-center text-white/70 text-xs md:text-sm font-bold tracking-widest uppercase">
+        <div class="absolute bottom-6 md:bottom-10 left-0 w-full text-center text-white text-xs md:text-sm font-bold tracking-[0.2em] uppercase bg-gradient-to-t from-black/80 to-transparent py-4">
             <span id="gallery-counter">1</span> / <span id="gallery-total">8</span>
+            <p class="text-[10px] text-gray-400 mt-2 font-normal normal-case md:hidden tracking-normal">Desliza para ver más</p>
         </div>
     </div>
 
     <!-- SCRIPTS -->
     <script>
-        // --- GALERÍA DE IMÁGENES ---
+        // --- GALERÍA DE IMÁGENES Y SWIPE ---
         const galleryImages = [
             "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454700/0W3A1345_amcels.jpg",
             "https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776454703/0W3A1385_wnezet.jpg",
@@ -907,7 +985,7 @@
             document.getElementById('gallery-total').textContent = galleryImages.length;
         }
 
-        // --- GESTOS TÁCTILES PARA LA GALERÍA (MÓVIL) ---
+        // Swipe táctil en galería
         let touchstartX = 0;
         let touchendX = 0;
         const lightboxElement = document.getElementById('gallery-lightbox');
@@ -918,8 +996,8 @@
 
         lightboxElement.addEventListener('touchend', e => {
             touchendX = e.changedTouches[0].screenX;
-            if (touchendX < touchstartX - 40) changeGalleryImage(1); // Deslizar hacia la izquierda (Siguiente)
-            if (touchendX > touchstartX + 40) changeGalleryImage(-1); // Deslizar hacia la derecha (Anterior)
+            if (touchendX < touchstartX - 40) changeGalleryImage(1); // Swipe a izquierda
+            if (touchendX > touchstartX + 40) changeGalleryImage(-1); // Swipe a derecha
         }, {passive: true});
 
         document.addEventListener('keydown', (e) => {
@@ -931,23 +1009,44 @@
             }
         });
 
-        // --- NAVEGACIÓN SPA ---
+        // --- MENÚ MÓVIL SUAVE ---
+        function toggleMobileMenu() { 
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            if(menu.classList.contains('menu-closed')){
+                menu.classList.remove('menu-closed');
+                menu.classList.add('menu-open');
+                btn.innerHTML = `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" /></svg>`;
+            } else {
+                menu.classList.remove('menu-open');
+                menu.classList.add('menu-closed');
+                btn.innerHTML = `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>`;
+            }
+        }
+
+        // --- NAVEGACIÓN SPA ROBUSTA ---
         function navigate(viewId, updateHistory = true) {
             document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
             const targetView = document.getElementById('view-' + viewId);
             if(targetView) targetView.classList.add('active');
             
-            const mobileMenu = document.getElementById('mobile-menu');
-            if(!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.getElementById('mobile-menu-btn');
+            if(menu.classList.contains('menu-open')) {
+                menu.classList.remove('menu-open');
+                menu.classList.add('menu-closed');
+                btn.innerHTML = `<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" /></svg>`;
+            }
             
             if(updateHistory) { history.pushState(null, null, '#' + viewId); }
             
-            // Salto instantáneo hacia arriba y control de rendimiento para el carrusel
-            window.scrollTo(0, 0);
+            window.scrollTo(0, 0); // Arriba instantáneo al cambiar pestaña
+            
             if(viewId !== 'home') {
-                clearInterval(slideInterval); // Pausa animaciones pesadas si no estás en el inicio
+                clearInterval(slideInterval); // Ahorra batería
             } else {
-                resetInterval(); // Reanuda si vuelves al inicio
+                resetInterval();
+                initTyping(); // Reinicia el tipeo al volver a home
             }
         }
 
@@ -955,8 +1054,6 @@
             const hash = window.location.hash.replace('#', '') || 'home';
             navigate(hash, false);
         });
-
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
         
         // --- FORMULARIOS ---
         function procesarBono(event) {
@@ -980,11 +1077,12 @@
 
         function mostrarCalendly() {
             const calendlySec = document.getElementById('calendly-section');
-            calendlySec.classList.remove('opacity-30', 'pointer-events-none');
-            setTimeout(() => { calendlySec.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 200);
+            calendlySec.classList.remove('opacity-30', 'pointer-events-none', 'h-0');
+            calendlySec.classList.add('h-[750px]'); // Expande para mostrar
+            setTimeout(() => { calendlySec.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 300);
         }
 
-        // --- CARRUSEL ---
+        // --- CARRUSEL PRINCIPAL & SWIPE ---
         let currentSlide = 0;
         const totalSlides = 3;
         let slideInterval;
@@ -1003,28 +1101,52 @@
         function goToSlide(index) { currentSlide = index; updateCarousel(); resetInterval(); }
         function resetInterval() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 6000); }
 
-        // --- GESTOS TÁCTILES PARA EL CARRUSEL PRINCIPAL ---
         const trackElement = document.getElementById('carousel-track');
         let heroTouchStartX = 0;
         let heroTouchEndX = 0;
         
-        trackElement.addEventListener('touchstart', e => {
-            heroTouchStartX = e.changedTouches[0].screenX;
-            clearInterval(slideInterval); // Pausa el autoplay al tocar
-        }, {passive: true});
+        if(trackElement) {
+            trackElement.addEventListener('touchstart', e => {
+                heroTouchStartX = e.changedTouches[0].screenX;
+                clearInterval(slideInterval); 
+            }, {passive: true});
 
-        trackElement.addEventListener('touchend', e => {
-            heroTouchEndX = e.changedTouches[0].screenX;
-            if (heroTouchEndX < heroTouchStartX - 50) nextSlide(); // Swipe Izquierda (Siguiente)
-            if (heroTouchEndX > heroTouchStartX + 50) prevSlide(); // Swipe Derecha (Anterior)
-            resetInterval();
-        }, {passive: true});
+            trackElement.addEventListener('touchend', e => {
+                heroTouchEndX = e.changedTouches[0].screenX;
+                if (heroTouchEndX < heroTouchStartX - 50) nextSlide(); 
+                if (heroTouchEndX > heroTouchStartX + 50) prevSlide(); 
+                resetInterval();
+            }, {passive: true});
+        }
+
+        // --- EFECTO TIPO DE LETRA (TYPING) ---
+        let typeTimeout;
+        function initTyping() {
+            clearTimeout(typeTimeout);
+            var heroSpan = document.getElementById('hero-typing');
+            if(!heroSpan) return;
+            var phrases=['consentirte.','brillar.','relajarte.','transformarte.'];
+            heroSpan.innerHTML='<span id="ana-typing"></span><span class="typing-cur"></span>';
+            var tEl=document.getElementById('ana-typing');
+            var pi=0, ci=phrases[0].length, del=false;
+            tEl.textContent=phrases[0];
+            function typeLoop(){
+                if(!document.getElementById('view-home').classList.contains('active')) return;
+                var p=phrases[pi];
+                if(!del){ tEl.textContent=p.slice(0,ci+1); ci++;
+                    if(ci>=p.length){ del=true; typeTimeout = setTimeout(typeLoop,2500); return; }
+                } else { tEl.textContent=p.slice(0,ci-1); ci--;
+                    if(ci<=0){ del=false; pi=(pi+1)%phrases.length; }
+                }
+                typeTimeout = setTimeout(typeLoop,del?40:90);
+            }
+            typeTimeout = setTimeout(typeLoop,2800);
+        }
 
         // --- ANIMACIONES & SCROLL REVEAL ---
         (function(){
             const RAF = requestAnimationFrame;
-            const isMouse = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
-
+            
             function initReveal(){
                 var obs = new IntersectionObserver(function(entries){
                     entries.forEach(function(e){
@@ -1033,18 +1155,15 @@
                             obs.unobserve(e.target);
                         }
                     });
-                },{threshold:0.1, rootMargin:'0px 0px -30px 0px'});
+                },{threshold: 0, rootMargin: '0px 0px -15% 0px'});
 
-                document.querySelectorAll('.service-card').forEach(function(el,i){
-                    el.classList.add('reveal'); el.style.transitionDelay = (i*0.09)+'s'; obs.observe(el);
+                document.querySelectorAll('.service-card, .stat-section, .stat-item').forEach(function(el,i){
+                    el.classList.add('reveal'); el.style.transitionDelay = (i*0.05)+'s'; obs.observe(el);
                 });
                 document.querySelectorAll('#view-nosotros .grid > div, #view-home .grid > div').forEach(function(el,i){
                     if(!el.classList.contains('reveal')){
-                        el.classList.add('reveal'); el.style.transitionDelay = (i*0.08)+'s'; obs.observe(el);
+                        el.classList.add('reveal'); el.style.transitionDelay = (i*0.05)+'s'; obs.observe(el);
                     }
-                });
-                document.querySelectorAll('.stat-section, .stat-item').forEach(function(el){
-                    el.classList.add('reveal'); obs.observe(el);
                 });
                 var left = document.querySelector('#nosotros-home .order-2');
                 var right = document.querySelector('#nosotros-home .order-1');
@@ -1056,31 +1175,8 @@
                 btn.classList.add('nav-line');
             });
 
-            if(isMouse){
-                var magSel = ['button.bg-ana-dark','button.border-ana-dark','a.bg-ana-dark','a[href*="wa.me"].rounded-full'].join(',');
-                document.querySelectorAll(magSel).forEach(function(btn){
-                    btn.classList.add('btn-mag');
-                    btn.addEventListener('mousemove',function(e){
-                        var r=btn.getBoundingClientRect();
-                        var dx=(e.clientX-r.left-r.width/2)*0.2; var dy=(e.clientY-r.top-r.height/2)*0.2;
-                        btn.style.transform='translate('+dx+'px,'+dy+'px)';
-                    });
-                    btn.addEventListener('mouseleave',function(){ btn.style.transform='translate(0,0)'; });
-                });
-
-                var heroMedia = document.querySelectorAll('#carousel-track img');
-                window.addEventListener('scroll',function(){
-                    var sy = window.scrollY;
-                    heroMedia.forEach(function(m){ m.style.transform='translateY('+(sy*0.22)+'px)'; });
-                },{passive:true});
-            }
-
             document.querySelectorAll('button,a').forEach(function(el){ el.classList.add('ripple-effect'); });
-            
-            // Ya aplicamos la animación a los elementos li en CSS
-            // document.querySelectorAll('#view-mujer li, #view-hombre li').forEach(function(li){ li.classList.add('price-row-anim'); });
-            
-            document.querySelectorAll('#view-nosotros .bg-white.rounded-sm, #view-home .bg-gray-50').forEach(function(el){ el.classList.add('card-lift'); });
+            document.querySelectorAll('#view-nosotros .bg-white.rounded-xl, #view-home .bg-gray-50').forEach(function(el){ el.classList.add('card-lift'); });
 
             var navEl=document.querySelector('nav');
             if(navEl){
@@ -1090,6 +1186,7 @@
             document.addEventListener('DOMContentLoaded', () => {
                 resetInterval();
                 initReveal();
+                initTyping();
                 const hash = window.location.hash.replace('#', '');
                 if(hash && document.getElementById('view-' + hash)) {
                     navigate(hash, false);
