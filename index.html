@@ -238,13 +238,12 @@
                     <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
                         <button onclick="navigate('nosotros')" class="text-xs font-bold tracking-[0.15em] text-gray-500 hover:text-ana-dark uppercase transition-colors nav-line">Nosotros</button>
                         
-                        <!-- Dropdown de Servicios (Corregido para no perder hover) -->
+                        <!-- Dropdown de Servicios -->
                         <div class="relative group h-full flex items-center">
                             <button onclick="navigate('servicios-portal')" class="flex items-center text-xs font-bold tracking-[0.15em] text-gray-500 hover:text-ana-dark uppercase transition-colors nav-line h-16 md:h-24">
                                 Servicios
                                 <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
-                            <!-- Contenedor invisible que actúa de puente -->
                             <div class="absolute top-[80%] left-0 pt-6 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                                 <div class="bg-white border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.1)] rounded-b-2xl overflow-hidden transform origin-top scale-95 group-hover:scale-100 transition-transform">
                                     <button onclick="navigate('mujer')" class="block w-full text-left px-6 py-4 text-xs font-bold tracking-widest text-gray-700 hover:bg-pink-50 hover:text-ana-dark uppercase border-b border-gray-50 transition-colors">💇‍♀️ Para Mujer</button>
@@ -268,7 +267,7 @@
                 </div>
             </div>
             
-            <!-- Mobile Menu Dropdown (Corregido y más explícito) -->
+            <!-- Mobile Menu Dropdown -->
             <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-100 absolute left-0 w-full shadow-2xl z-40 menu-closed">
                 <div class="px-4 pt-2 pb-6 space-y-1">
                     <button onclick="navigate('nosotros')" class="block w-full text-left px-3 py-4 text-sm font-bold tracking-widest text-gray-900 border-b border-gray-50 uppercase active:bg-gray-50 ripple-effect">Nosotros</button>
@@ -626,6 +625,186 @@
         </div>
 
         <!-- ==============================================
+             VISTA: MUJER 
+             ============================================== -->
+        <div id="view-mujer" class="page-view">
+            <div class="py-16 md:py-24 bg-white relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- Botón Volver -->
+                    <button onclick="navigate('servicios-portal')" class="mb-6 inline-flex items-center gap-2 text-gray-600 hover:text-ana-dark transition-colors font-medium text-xs sm:text-sm bg-gray-50 hover:bg-pink-50 px-4 py-2 rounded-full shadow-sm active:scale-95 ripple-effect border border-gray-100">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Volver a Categorías
+                    </button>
+                    
+                    <div class="text-center mb-14 md:mb-16">
+                        <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-3 tracking-tight uppercase">Catálogo <strong class="font-bold text-ana-dark">Mujer</strong></h2>
+                        <div class="w-16 h-1 bg-ana-dark mx-auto rounded-full"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                                <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450391/0W3A1829_yw8a2m.jpg" alt="Cuidado Capilar Femenino" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105">
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-ana-dark px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
+                                </div>
+                            </div>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-ana-dark rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg></div>
+                                <h3 class="text-xl font-bold text-ana-black mb-5 tracking-wide uppercase">Cuidado Capilar</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Corte de Cabello</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Lavado / Shampoo</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $5.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Cepillado</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Tinturas / Color</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa val.</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Mechas / Balayage</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa val.</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Repolarización</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $30.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Aminoácidos</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $100.000</span></li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                                <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450407/0W3A1736_cstnou.jpg" alt="Spa de uñas para mujeres" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105">
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-ana-dark px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
+                                </div>
+                            </div>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-ana-dark rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white">💅</div>
+                                <h3 class="text-xl font-bold text-ana-black mb-5 tracking-wide uppercase">Nail Bar & Spa</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Manicure Tradicional</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Pedicure Tradicional</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$25.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Semipermanente</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$45.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Pedicure Semi</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$50.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Base Rubber</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$65.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Baño Poly gel</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$75.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Press On</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$90.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Montura Poly gel</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$130.000</span></li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(232,62,140,0.08)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-100 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                                <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776452352/0W3A1801_ddhbvs.jpg" alt="Tratamientos faciales y estéticos" class="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105">
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/60 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-ana-dark px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
+                                </div>
+                            </div>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-ana-dark rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg></div>
+                                <h3 class="text-xl font-bold text-ana-black mb-5 tracking-wide uppercase">Estética & Mirada</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Masajes Reductores</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Limpieza Facial</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $60.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Micropigmentación</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Previa val.</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Lifting de Pestañas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-ana-accent mr-3"></div> Diseño de Cejas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $15.000</span></li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-ana-light text-ana-dark hover:bg-ana-dark hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================
+             VISTA: HOMBRE 
+             ============================================== -->
+        <div id="view-hombre" class="page-view">
+            <div class="py-16 md:py-24 bg-gray-50 relative">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <!-- Botón Volver -->
+                    <button onclick="navigate('servicios-portal')" class="mb-6 inline-flex items-center gap-2 text-gray-600 hover:text-ana-dark transition-colors font-medium text-xs sm:text-sm bg-white hover:bg-gray-100 px-4 py-2 rounded-full shadow-sm active:scale-95 ripple-effect border border-gray-200">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Volver a Categorías
+                    </button>
+
+                    <div class="text-center mb-14 md:mb-16">
+                        <h2 class="text-3xl md:text-4xl font-light text-ana-black mb-3 tracking-tight uppercase">Catálogo <strong class="font-bold text-gray-900">Hombre</strong></h2>
+                        <div class="w-16 h-1 bg-gray-800 mx-auto rounded-full"></div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-200 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                                <img src="https://res.cloudinary.com/dfj0ckm10/image/upload/f_auto,q_auto/v1776450441/0W3A1922_bj4r5o.jpg" alt="Corte de cabello y barbería" class="w-full h-full object-cover grayscale transition-transform duration-1000 ease-out group-hover:scale-105 group-hover:grayscale-0">
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-gray-900 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
+                                </div>
+                            </div>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-gray-800 rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"></path></svg></div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-5 tracking-wide uppercase">Corte & Estilo</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Corte Clásico / Moderno</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Lavado / Shampoo</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $5.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Colorimetría</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $40.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Camuflaje de Canas</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $30.000</span></li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-gray-100 text-gray-800 hover:bg-gray-900 hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-card group flex flex-col h-full bg-white shadow-[0_5px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all duration-500 border border-gray-100 rounded-xl overflow-hidden card-lift">
+                            <div class="relative h-64 md:h-72 w-full mb-0 overflow-hidden bg-gray-200 cursor-pointer active:scale-[0.98] transition-transform" onclick="navigate('agendamiento')">
+                                <img src="https://images.unsplash.com/photo-1512618831669-521d4b375f5d?q=80&w=1974&auto=format&fit=crop" alt="Cuidado personal y estético masculino" class="w-full h-full object-cover grayscale transition-transform duration-1000 ease-out group-hover:scale-105 group-hover:grayscale-0">
+                                <div class="service-img-overlay absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-colors duration-300 flex items-end justify-center opacity-100 md:opacity-0 md:group-hover:opacity-100 pb-6">
+                                    <span class="bg-white text-gray-900 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Reservar Cita</span>
+                                </div>
+                            </div>
+                            <div class="p-6 md:p-8 flex-grow bg-white relative">
+                                <div class="absolute -top-6 right-6 w-12 h-12 bg-gray-800 rounded-full text-white flex items-center justify-center shadow-lg border-4 border-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-5 tracking-wide uppercase">Cuidado Personal</h3>
+                                <ul class="space-y-0 w-full text-gray-700">
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Limpieza Facial Profunda</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $60.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Manicure Masculino</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$20.000</span></li>
+                                    <li class="flex justify-between items-center py-3 border-b border-gray-50 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Pedicure y SPA</span><span class="text-[10px] md:text-xs font-medium text-gray-400">$25.000</span></li>
+                                    <li class="flex justify-between items-center py-3 px-2 price-row-anim"><span class="flex items-center font-medium text-xs md:text-sm"><div class="w-1.5 h-1.5 rounded-full bg-gray-800 mr-3"></div> Masajes Relajantes</span><span class="text-[10px] md:text-xs font-medium text-gray-400">Desde $50.000</span></li>
+                                </ul>
+                            </div>
+                            <div class="mt-auto px-6 pb-6 md:px-8 md:pb-8">
+                                <div class="pt-4 text-center">
+                                    <button onclick="navigate('agendamiento')" class="mobile-pulse-arrow bg-gray-100 text-gray-800 hover:bg-gray-900 hover:text-white px-4 py-3 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 w-full ripple-effect">
+                                        Agendar este servicio <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==============================================
              VISTA: GALERÍA (NUEVA PESTAÑA)
              ============================================== -->
         <div id="view-galeria" class="page-view">
@@ -721,6 +900,57 @@
                         </div>
                     </div>
 
+                </div>
+            </section>
+        </div>
+
+        <!-- ==============================================
+             VISTA: UBICACION 
+             ============================================== -->
+        <div id="view-ubicacion" class="page-view">
+            <section class="py-16 md:py-24 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12 md:mb-14">
+                        <h2 class="text-3xl md:text-5xl font-light text-ana-black mb-4 tracking-tight uppercase">Nuestra <strong class="font-bold text-ana-dark">Ubicación</strong></h2>
+                        <div class="w-16 h-1 bg-ana-dark mx-auto rounded-full mb-4"></div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start">
+                        <div class="flex flex-col justify-between bg-gray-50 p-8 md:p-12 border-t-4 border-ana-dark shadow-[0_15px_40px_rgba(0,0,0,0.06)] rounded-xl relative overflow-hidden">
+                            <div class="absolute -right-10 -top-10 text-pink-100 opacity-50 w-40 h-40">
+                                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            </div>
+                            <div class="relative z-10">
+                                <div class="mb-10">
+                                    <h3 class="text-sm font-bold tracking-[0.2em] text-ana-dark uppercase mb-4 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> Sede Principal</h3>
+                                    <p class="text-gray-700 font-light leading-relaxed text-base md:text-lg">
+                                        <strong class="font-bold text-gray-900">Puente Aranda</strong><br/>
+                                        Cra. 43c #5-84, Nueva Primavera<br/>
+                                        Bogotá, Cundinamarca<br/>
+                                        <span class="text-sm text-gray-500 mt-2 inline-block bg-white px-3 py-1 rounded-md border border-gray-100 shadow-sm">📍 A mano izquierda de la Distribuidora Olmos</span>
+                                    </p>
+                                </div>
+                                <div class="mb-8">
+                                    <h3 class="text-sm font-bold tracking-[0.2em] text-ana-dark uppercase mb-4 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Horarios</h3>
+                                    <ul class="text-gray-700 font-light space-y-4 text-sm md:text-base">
+                                        <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Lunes a Sábado</span> <span class="font-bold text-gray-900 bg-white px-3 py-1 rounded-full shadow-sm">8:00 AM - 8:00 PM</span></li>
+                                        <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Domingos</span> <span class="font-bold text-gray-900 bg-white px-3 py-1 rounded-full shadow-sm">10:00 AM - 7:00 PM</span></li>
+                                        <li class="text-ana-dark pt-2 text-sm font-bold tracking-wider uppercase flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg> Martes cerrado (Día de descanso)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-6">
+                            <div class="w-full h-64 md:h-[400px] rounded-xl overflow-hidden border border-gray-200 shadow-[0_15px_40px_rgba(0,0,0,0.08)] group relative p-1 bg-white">
+                                <div class="w-full h-full rounded-lg overflow-hidden relative">
+                                    <iframe src="https://maps.google.com/maps?q=Ana+Molano+Peluqueria+Bogota&t=&z=16&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa de Ana Molano Peluquería" class="grayscale group-hover:grayscale-0 transition-all duration-700"></iframe>
+                                </div>
+                            </div>
+                            <a href="https://maps.google.com/?q=Ana+Molano+Peluqueria+Bogota" target="_blank" class="w-full bg-ana-dark text-white hover:bg-ana-black px-6 py-4 rounded-xl text-xs md:text-sm font-bold tracking-widest uppercase transition-all duration-300 shadow-[0_8px_20px_rgba(232,62,140,0.3)] flex justify-center items-center gap-2 active:scale-95 ripple-effect btn-mag">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                                Iniciar Navegación en Google Maps
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
@@ -1321,7 +1551,7 @@
                 document.querySelectorAll('.service-card, .stat-section, .stat-item').forEach(function(el,i){
                     el.classList.add('reveal'); el.style.transitionDelay = (i*0.05)+'s'; obs.observe(el);
                 });
-                document.querySelectorAll('#view-nosotros .grid > div, #view-home .grid > div, #view-galeria .grid > div').forEach(function(el,i){
+                document.querySelectorAll('#view-nosotros .grid > div, #view-home .grid > div, #view-galeria .grid > div, #view-mujer .grid > div, #view-hombre .grid > div').forEach(function(el,i){
                     if(!el.classList.contains('reveal')){
                         el.classList.add('reveal'); el.style.transitionDelay = (i*0.05)+'s'; obs.observe(el);
                     }
@@ -1337,7 +1567,7 @@
             });
 
             document.querySelectorAll('button,a').forEach(function(el){ el.classList.add('ripple-effect'); });
-            document.querySelectorAll('#view-nosotros .bg-white.rounded-xl, #view-home .bg-gray-50').forEach(function(el){ el.classList.add('card-lift'); });
+            document.querySelectorAll('#view-nosotros .bg-white.rounded-xl, #view-home .bg-gray-50, #view-mujer .bg-white.rounded-xl, #view-hombre .bg-white.rounded-xl').forEach(function(el){ el.classList.add('card-lift'); });
 
             var navEl=document.querySelector('nav');
             if(navEl){
